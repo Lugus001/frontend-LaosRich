@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <div class="bg-gray-700 p-5 w-full ">
+    <h1 class="text-white text-right text-sm flex items-center justify-end">
+      <span>Thai (TH)</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="ml-2">
+        <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </h1>
+  </div>
+<body>
+  <div class="min-h-screen flex flex-col items-center justify-center p-5 bg-gray-700">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+      <div class="flex flex-col items-center p-5">
+        <img src='loaluay.png' alt='Icon' class="w-[35%]">
+      </div>
+      <h2 class="text-2xl font-bold mb-6 text-center text-gray-800 font-kanit">สมัครสมาชิก</h2>
+      <form action="#" method="POST">
+        <!-- Phone and Email in one line for screens > 800px -->
+        <div class="mb-4 md:flex md:space-x-4">
+          <div class="flex flex-col w-full md:w-1/2">
+            <label for="phone" class="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์ผู้สมัคร</label>
+            <div class="flex mt-1">
+              <select id="phonePrefix" name="phonePrefix" class="border border-gray-300 rounded-l-md p-2 w-1/4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option value="+66"> +66 (Thailand)</option>
+                <option value="+1">+1 (USA)</option>
+                <option value="+44">+44 (UK)</option>
+                <option value="+91">+91 (India)</option>
+              </select>
+              <input type="tel" id="phone" name="phone" required
+                     class="border border-gray-300 rounded-r-md p-2 w-3/4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="กรุณาใส่เบอร์โทรศัพท์">
+            </div>
+          </div>
+          <div class="flex flex-col w-full md:w-1/2 mt-4 md:mt-0">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="email" name="email" required
+                   class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"  placeholder="กรุณาใส่ Email">
+          </div>
+        </div>
+
+        <div class="mb-4 md:flex md:space-x-4">
+            <div class="flex flex-col w-full md:w-1/2">
+
+              <label for="name" class="block text-sm font-medium text-gray-700 "  >ชื่อ</label>
+              <input type="text" id="name" name="name" required
+                    class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="กรุณาใส่ชือ">
+            </div>
+            <div class="flex flex-col w-full md:w-1/2 mt-4 md:mt-0">
+              <label for="surname" class="block text-sm font-medium text-gray-700" >นามสกุล</label>
+            <input type="text" id="surname" name="surname" required
+                  class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 " placeholder="กรุณาใส่นามสกุล">
+            </div>
+        </div>
+
+        <div class="mb-4 md:flex md:space-x-4">
+          <div class="flex flex-col w-full md:w-1/2">
+            <label for="nationality" class="block text-sm font-medium text-gray-700">เลือกสัญชาติ</label>
+              <div class="flex mt-1">
+                <select id="nationality" name="nationality" class="border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option value="ไทย">ไทย</option>
+                  <option value="ลาว">ลาว</option>
+                </select>
+              </div>
+          </div>
+          <div class="flex flex-col w-full md:w-1/2 mt-4 md:mt-0">
+            <label for="password" class="block text-sm font-medium text-gray-700">ตั้งรหัสผ่าน</label>
+            <input type="password" id="password" name="password" required
+                  class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                  oninput="validatePassword()"
+                  placeholder="ใช้อย่างน้อย 8 ตัวอักษร"
+                  >
+            <p id="password-alert" class="text-red-600 mt-1 hidden">รหัสผ่านของคุณใช้อย่างน้อย 8 ตัวอักษร</p>
+          </div>
+        </div>
+
+        <div class="flex items-center mb-4">
+          <div class="flex items-center">
+            <input type="checkbox" id="remember" name="remember" class="h-4 w-4 text-blue-600">
+            <label for="remember" class="block text-sm font-medium text-gray-700 font-kanit p-2">จดจำฉันไว้</label>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full text-white py-2 rounded-md font-semibold hover:bg-blue-700 font-kanit" style="background: linear-gradient(to right, #22C55E 0%, #F8BB54 100%);">          
+          สมัครสมาชิก
+        </button>
+
+        <div class="flex items-center justify-center my-8">
+          <div class="border-t border-gray-400 flex-grow mr-2"></div>
+          <span class="text-center font-bold text-sm text-gray-400 font-kanit">หรือสมัครสมาชิกด้วย</span>
+          <div class="border-t border-gray-400 flex-grow ml-2"></div>
+        </div>
+
+        
+        <div class="flex justify-center pt-2">
+          <button type="button" class="w-full text-gray-500 py-3 rounded-md bg-white border border-gray-400 text-sm hover:bg-gray-300 flex items-center justify-center">
+            <div class="pr-2">
+              <img src="ggImg.svg" alt="google Logo">
+            </div>
+            ลงชื่อเข้าใช้งานด้วย Google
+          </button>
+        </div>
+
+        <div class="flex justify-center pt-2">
+          <button type="button" class="w-full text-gray-500 py-3 rounded-md bg-white border border-gray-400 text-sm hover:bg-gray-300 flex items-center justify-center">
+            <div class="pr-2">
+              <img src="line.svg" alt="Line Logo">
+            </div>
+            ลงชื่อเข้าใช้งานด้วย Line          
+          </button>
+        </div>
+
+        <p class="text-center text-sm text-gray-600 mt-4">
+          หากคุณมีบัญชีอยู่แล้ว? <a href="#" class="text-green-500 hover:text-blue-800">เข้าสู่ระบบ</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

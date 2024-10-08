@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
-import AuthLayout from './layouts/AuthLayout';
+//import AuthLayout from './layouts/AuthLayout';
 import Home from './pages/Home';
-import Login from './pages/Auth/Login';
-import Register from './pages/Auth/Register';
+//import Login from './pages/Auth/Login.html';
+//import Register from './pages/Auth/Register.html';
 import Test from './pages/Test';
 import NotFound from './pages/NotFound';
 import RequireAuth from './components/etc/RequireAuth';
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
+  {/*
     path: '/auth',
     element: <AuthLayout />,
     children: [
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
     ],
-  },
+  */},
   {
     path: '/test',
     element: <Test />,

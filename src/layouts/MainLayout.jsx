@@ -10,7 +10,7 @@ const MainLayout = () => {
           <img src="/src/assets/logo/logo.png" alt="logo" width={75} />
         </Link>
         <Link className="m-2" to="/">Home</Link>
-        <Link className="m-2" to="/auth">Login</Link>
+        <Link className="m-2" to="/Login.html">Login</Link>
       </nav>
       <main>
         <Outlet />
