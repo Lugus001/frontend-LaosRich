@@ -1,22 +1,24 @@
-import React from 'react'
-import { Outlet, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import SideBar from '../pages/global/Sidebar';
+import Topbar from '../pages/global/Topbar';
 
 const MainLayout = () => {
-  return (
-    <>
-      <nav className='bg-blue-500 text-white flex items-center'>
-        <Link className="m-2" to="/">
-          
-          <img src="/src/assets/logo/logo.png" alt="logo" width={75} />
-        </Link>
-        <Link className="m-2" to="/">Home</Link>
-        <Link className="m-2" to="/Login.html">Login</Link>
-      </nav>
-      <main>
-        <Outlet />
-      </main>
-    </>
-  )
-}
+  const [isSidebar, setIsSidebar] = useState(true);
 
-export default MainLayout
+  return (
+    <div className="flex h-screen">
+      {isSidebar && <SideBar />}
+
+      <div className="flex flex-col flex-1">
+        <Topbar />
+
+        <div className="flex-1 bg-gray-100 p-4">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MainLayout;
