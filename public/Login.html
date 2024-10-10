@@ -10,27 +10,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&display=swap");
+      body {
+        font-family: 'Kanit', sans-serif; 
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-      function handleSubmit(event) {
-        event.preventDefault();
-        
-        Swal.fire({
-          title: 'เข้าสู่ระบบเรียบร้อยแล้ว!',
-          icon: 'success',
-          confirmButtonText: 'ตกลง',
-          confirmButtonColor: '#22c55e',
-          background: '#fff',
-        }).then(() => {
-          window.location.href = "https://laoruay.com";
-        });
-      }
-    </script>
   </head>
-  <body class="bg-[#19705E]">
+
+  <body class="bg-[#02EAD0]">
     <div class="bg-[#02EAD0] w-full">
       <h1 class="text-black text-right text-xl flex items-center justify-end p-5">
         <span>Thai (TH)</span>
@@ -52,7 +39,7 @@
         </svg>
       </h1>
     </div>
-
+    
     <main class="min-h-screen flex justify-center">
       <div class="min-h-screen flex flex-col items-center justify-center bg-[#116860]">
         <div class="flex flex-col items-center mb-8">
@@ -66,11 +53,11 @@
             เข้าสู่ระบบหรือสมัครสมาชิก
           </h1>
 
-          <form onsubmit="handleSubmit(event)">
+          <form id="loginForm">
             <div class="mb-4">
               <label for="email" class="block text-xl font-extrabold text-white font-kanit">ที่อยู่อีเมลหรือผู้ใช้งาน</label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 name="email"
                 required
@@ -85,7 +72,6 @@
                 id="password"
                 name="password"
                 required
-                oninput="validatePassword()"
                 class="mt-1 p-2 w-full border border-gray-600 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400"
               />
             </div>
@@ -110,47 +96,85 @@
             >
               เข้าสู่ระบบ
             </button>
-
-            <div class="flex items-center justify-center my-8">
-              <div class="border-t border-gray-400 flex-grow mr-2"></div>
-              <span class="text-center font-bold text-md text-white font-kanit">หรือเข้าสู่ระบบด้วย</span>
-              <div class="border-t border-gray-400 flex-grow ml-2"></div>
-            </div>
-
-            <div class="flex justify-center mb-5">
-              <button
-                type="button"
-                class="w-full text-black py-3 rounded-md bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out"
-              >
-                <div class="pr-2">
-                  <img src="ggImg.svg" alt="Google Logo" class="w-5 h-5" />
-                </div>
-                ลงชื่อเข้าใช้งานด้วย Google
-              </button>
-            </div>
-
-            <div class="flex justify-center mb-5">
-              <button
-                type="button"
-                class="w-full text-black py-3 rounded-md bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out"
-              >
-                <div class="pr-4">
-                  <img src="line.svg" alt="Line Logo" class="w-5 h-5" />
-                </div>
-                ลงชื่อเข้าใช้งานด้วย Line
-              </button>
-            </div>
-
-            <div class="flex items-center justify-center my-8">
-              <h1 class="text-white text-md pr-1">ยังไม่มีบัญชี?</h1>
-              <a href="../register.html" class="text-[#FFFB00] text-sm">สมัครสมาชิก</a>
-            </div>
           </form>
+
+          <div class="flex items-center justify-center my-8">
+            <div class="border-t border-gray-400 flex-grow mr-2"></div>
+            <span class="text-center font-bold text-md text-white font-kanit">หรือเข้าสู่ระบบด้วย</span>
+            <div class="border-t border-gray-400 flex-grow ml-2"></div>
+          </div>
+
+          <div class="flex justify-center mb-5">
+            <button
+              type="button"
+              class="w-full text-black py-3 rounded-md bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out"
+            >
+              <div class="pr-2">
+                <img src="ggImg.svg" alt="Google Logo" class="w-5 h-5" />
+              </div>
+              ลงชื่อเข้าใช้งานด้วย Google
+            </button>
+          </div>
+
+          <div class="flex justify-center mb-5">
+            <button
+              type="button"
+              class="w-full text-black py-3 rounded-md bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out"
+            >
+              <div class="pr-4">
+                <img src="line.svg" alt="Line Logo" class="w-5 h-5" />
+              </div>
+              ลงชื่อเข้าใช้งานด้วย Line
+            </button>
+          </div>
+
+          <div class="flex items-center justify-center my-8">
+            <h1 class="text-white text-md pr-1">ยังไม่มีบัญชี?</h1>
+            <a href="../register.html" class="text-[#FFFB00] text-sm">สมัครสมาชิก</a>
+          </div>
         </div>
       </div>
       <div class="image-section hidden md:flex justify-center items-center bg-[#2BA89C] min-h-full">
         <img src="loaluay.png" alt="Icon" class="w-[50%]" />
       </div>
     </main>
+    <script>
+      document.getElementById("loginForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        try {
+          const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+              { 
+              username:email ,
+              password 
+            }
+          ),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            console.log(data);
+            localStorage.setItem('token', data.token);
+            Swal.fire('Login Successful', 'Welcome!', 'success');
+            window.location.href='/dashboard.html';
+          } else {
+            Swal.fire('Login Failed', data.message || 'An error occurred', 'error');
+
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          Swal.fire('Error', 'There was a problem with your request.', 'error');
+        }
+      });
+    </script>
   </body>
 </html>

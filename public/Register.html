@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,26 +30,10 @@
       </h1>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-      function handleSubmit(event) {
-        event.preventDefault();
-        
-        Swal.fire({
-          title: 'สมัครสมาชิกเรียบร้อยแล้ว!',
-          icon: 'success',
-          confirmButtonText: 'ตกลง',
-          confirmButtonColor: '#22c55e',
-          background: '#fff',
-        }).then(() => {
-          window.location.href = "/login.html";
-        });
-      }
-    </script>
   </head>
   <body>
     <div
-      class="min-h-screen flex flex-col items-center justify-center p-5 bg-[#116860]""
+      class="min-h-screen flex flex-col items-center justify-center p-5 bg-[#116860]"
     >
       <div class="bg-[#208D83] border border-[#02EAD0] shadow-lg rounded-lg p-8 w-full max-w-md">
         <div class="flex flex-col items-center p-5">
@@ -60,16 +44,25 @@
         >
           สมัครสมาชิก
         </h2>
-        <form onsubmit="handleSubmit(event)">
-          <div class="mb-4 md:flex md:space-x-4">
-            <div class="flex flex-col w-full md:w-1/2">
-              <label for="phone" class="block text-md font-medium text-white"
-                >เบอร์โทรศัพท์ผู้สมัคร</label
-              >
+        <form id="registerForm">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="flex flex-col">
+              <label for="username" class="block text-md font-medium text-white">User Name</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                required
+                class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="กรุณาใส่ User Name"
+              />
+            </div>
+            <div class="flex flex-col">
+              <label for="phone" class="block text-md font-medium text-white">เบอร์โทรศัพท์ผู้สมัคร</label>
               <div class="flex mt-1">
                 <select
-                  id="phonePrefix"
-                  name="phonePrefix"
+                  id="phone_prefix"
+                  name="phone_prefix"
                   class="border border-gray-300 rounded-l-md p-2 w-1/4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="+66">+66 (Thailand)</option>
@@ -87,10 +80,8 @@
                 />
               </div>
             </div>
-            <div class="flex flex-col w-full md:w-1/2 mt-4 md:mt-0">
-              <label for="email" class="block text-md font-medium text-white"
-                >Email</label
-              >
+            <div class="flex flex-col">
+              <label for="email" class="block text-md font-medium text-white">Email</label>
               <input
                 type="email"
                 id="email"
@@ -100,63 +91,41 @@
                 placeholder="กรุณาใส่ Email"
               />
             </div>
-          </div>
-
-          <div class="mb-4 md:flex md:space-x-4">
-            <div class="flex flex-col w-full md:w-1/2">
-              <label for="name" class="block text-md font-medium text-white"
-                >ชื่อ</label
-              >
+            <div class="flex flex-col">
+              <label for="first_name" class="block text-md font-medium text-white">ชื่อ</label>
               <input
                 type="text"
-                id="name"
-                name="name"
+                id="first_name"
+                name="first_name"
                 required
                 class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="กรุณาใส่ชือ"
+                placeholder="กรุณาใส่ชื่อ"
               />
             </div>
-            <div class="flex flex-col w-full md:w-1/2 mt-4 md:mt-0">
-              <label
-                for="surname"
-                class="block text-md font-medium text-white"
-                >นามสกุล</label
-              >
+            <div class="flex flex-col">
+              <label for="last_name" class="block text-md font-medium text-white">นามสกุล</label>
               <input
                 type="text"
-                id="surname"
-                name="surname"
+                id="last_name"
+                name="last_name"
                 required
                 class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="กรุณาใส่นามสกุล"
               />
             </div>
-          </div>
-
-          <div class="mb-4 md:flex md:space-x-4">
-            <div class="flex flex-col w-full md:w-1/2">
-              <label
-                for="nationality"
-                class="block text-md font-medium text-white"
-                >เลือกสัญชาติ</label
+            <div class="flex flex-col">
+              <label for="region" class="block text-md font-medium text-white">เลือกสัญชาติ</label>
+              <select
+                id="region"
+                name="region"
+                class="border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
-              <div class="flex mt-1">
-                <select
-                  id="nationality"
-                  name="nationality"
-                  class="border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="ไทย">ไทย</option>
-                  <option value="ลาว">ลาว</option>
-                </select>
-              </div>
+                <option value="ไทย">ไทย</option>
+                <option value="ลาว">ลาว</option>
+              </select>
             </div>
-            <div class="flex flex-col w-full md:w-1/2 mt-4 md:mt-0">
-              <label
-                for="password"
-                class="block text-md font-medium text-white"
-                >ตั้งรหัสผ่าน</label
-              >
+            <div class="flex flex-col">
+              <label for="password" class="block text-md font-medium text-white">ตั้งรหัสผ่าน</label>
               <input
                 type="password"
                 id="password"
@@ -166,9 +135,7 @@
                 oninput="validatePassword()"
                 placeholder="ใช้อย่างน้อย 8 ตัวอักษร"
               />
-              <p id="password-alert" class="text-red-600 mt-1 hidden">
-                รหัสผ่านของคุณใช้อย่างน้อย 8 ตัวอักษร
-              </p>
+              <p id="password-alert" class="text-red-600 mt-1 hidden">รหัสผ่านของคุณใช้อย่างน้อย 8 ตัวอักษร</p>
             </div>
           </div>
 
@@ -180,64 +147,117 @@
                 name="remember"
                 class="h-4 w-4 text-blue-600"
               />
-              <label
-                for="remember"
-                class="block text-md font-medium text-white p-2"
-                >จดจำฉันไว้</label
-              >
+              <label for="remember" class="block text-md font-medium text-white p-2">จดจำฉันไว้</label>
             </div>
           </div>
 
           <button
             type="submit"
             class="w-full text-white py-2 rounded-md font-semibold hover:bg-blue-700 font-kanit"
-            style="
-              background: linear-gradient(to right, #22c55e 0%, #f8bb54 100%);
-            "
+            style="background: linear-gradient(to right, #22c55e 0%, #f8bb54 100%);"
           >
             สมัครสมาชิก
           </button>
-
-          <div class="flex items-center justify-center my-8">
-            <div class="border-t border-gray-400 flex-grow mr-2"></div>
-            <span class="text-center text-md font-medium text-white font-kanit"
-              >หรือสมัครสมาชิกด้วย</span
-            >
-            <div class="border-t border-gray-400 flex-grow ml-2"></div>
-          </div>
-
-          <div class="flex justify-center pt-2">
-            <button
-              type="button"
-              class="w-full text-gray-500 py-3 rounded-md bg-white border border-gray-400 text-sm hover:bg-gray-300 flex items-center justify-center"
-            >
-              <div class="pr-2">
-                <img src="ggImg.svg" alt="google Logo" />
-              </div>
-              ลงชื่อเข้าใช้งานด้วย Google
-            </button>
-          </div>
-
-          <div class="flex justify-center pt-2">
-            <button
-              type="button"
-              class="w-full text-gray-500 py-3 rounded-md bg-white border border-gray-400 text-sm hover:bg-gray-300 flex items-center justify-center"
-            >
-              <div class="pr-2">
-                <img src="line.svg" alt="Line Logo" />
-              </div>
-              ลงชื่อเข้าใช้งานด้วย Line
-            </button>
-          </div>
-
-          <p class="text-center text-sm text-white mt-4">
-            หากคุณมีบัญชีอยู่แล้ว?
-            <a href="/login.html" class="text-[#F9FF00] hover:text-blue-800"
-              >เข้าสู่ระบบ</a
-            >
-          </p>
         </form>
+
+        <div class="flex items-center justify-center my-8">
+          <div class="border-t border-gray-400 flex-grow mr-2"></div>
+          <span class="text-center text-md font-medium text-white font-kanit">หรือสมัครสมาชิกด้วย</span>
+          <div class="border-t border-gray-400 flex-grow ml-2"></div>
+        </div>
+
+        <div class="flex justify-center pt-2">
+          <button
+            type="button"
+            class="w-full text-gray-500 py-3 rounded-md bg-white border border-gray-400 text-sm hover:bg-gray-300 flex items-center justify-center"
+          >
+            <div class="pr-2">
+              <img src="ggImg.svg" alt="Google Logo" />
+            </div>
+            ลงชื่อเข้าใช้งานด้วย Google
+          </button>
+        </div>
+
+        <div class="flex justify-center pt-2">
+          <button
+            type="button"
+            class="w-full text-gray-500 py-3 rounded-md bg-white border border-gray-400 text-sm hover:bg-gray-300 flex items-center justify-center"
+          >
+            <div class="pr-2">
+              <img src="line.svg" alt="Line Logo" />
+            </div>
+            ลงชื่อเข้าใช้งานด้วย Line
+          </button>
+        </div>
       </div>
     </div>
+    <script>
+      function validatePassword() {
+        const password = document.getElementById("password").value;
+        const passwordAlert = document.getElementById("password-alert");
+        if (password.length < 8) {
+          passwordAlert.classList.remove("hidden");
+        } else {
+          passwordAlert.classList.add("hidden");
+        }
+      }
+
+      const form = document.getElementById("registerForm");
+
+      form.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const phone_prefix = document.getElementById("phone_prefix").value;
+  const phone = document.getElementById("phone").value;
+  const email = document.getElementById("email").value;
+  const first_name = document.getElementById("first_name").value;
+  const last_name = document.getElementById("last_name").value;
+  const region = document.getElementById("region").value;
+  const password = document.getElementById("password").value;
+  const username = document.getElementById("username").value;
+
+  // Validate that all required fields are filled
+  if (!username || !password || !phone || !region) {
+    Swal.fire('Missing Fields', 'Please fill in all required fields.', 'error');
+    return;
+  }
+
+  const registrationData = {
+    username,
+    phone_prefix,
+    phone,
+    email,
+    first_name,
+    last_name,
+    region,
+    password,
+  };
+
+  try {
+    const response = await fetch("http://192.168.1.154:8899/laosruey/api/v1/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(registrationData),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      console.log(result);
+      localStorage.setItem('token', result.token);
+      Swal.fire('Register Successful', 'Welcome!', 'success');
+      window.location.href = '/login.html';
+    } else {
+      Swal.fire('Register Failed', result.message || 'An error occurred', 'error');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    Swal.fire('Error', 'There was a problem with your request.', 'error');
+  }
+});
+
+    </script>
   </body>
 </html>
