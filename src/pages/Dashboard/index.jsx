@@ -13,7 +13,6 @@ const Index = () => {
     month: 'long',
   });
   
-
   return (
     <Box className="p-5">
       <Box className="flex float-end border border-gray-300   p-1">
@@ -31,7 +30,7 @@ const Index = () => {
       </Box>
       <Box
         display="grid"
-        gridTemplateColumns={{ xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }} // Responsive grid
+        gridTemplateColumns={{ xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }} 
         gridAutoRows="150px"
         gap="20px"
         className="p-5"

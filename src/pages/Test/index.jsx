@@ -10,6 +10,7 @@ const index = () => {
         <p>Card Components</p>
         <div className='flex flex-col gap-2'>
             <CardSample />
+          
         </div>
       </div>
     </div>

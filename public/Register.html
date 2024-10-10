@@ -29,12 +29,21 @@
         </svg>
       </h1>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
       function handleSubmit(event) {
         event.preventDefault();
-        alert("ลงทะเบียนเรียบร้อยแล้ว!");
-
-        window.location.href = "/login.html";
+        
+        Swal.fire({
+          title: 'สมัครสมาชิกเรียบร้อยแล้ว!',
+          icon: 'success',
+          confirmButtonText: 'ตกลง',
+          confirmButtonColor: '#22c55e',
+          background: '#fff',
+        }).then(() => {
+          window.location.href = "/login.html";
+        });
       }
     </script>
   </head>
@@ -52,7 +61,6 @@
           สมัครสมาชิก
         </h2>
         <form onsubmit="handleSubmit(event)">
-          <!-- Phone and Email in one line for screens > 800px -->
           <div class="mb-4 md:flex md:space-x-4">
             <div class="flex flex-col w-full md:w-1/2">
               <label for="phone" class="block text-sm font-medium text-gray-700"
