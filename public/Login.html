@@ -30,11 +30,9 @@
       }
     </script>
   </head>
-  <body class="bg-gray-700">
-    <div class="bg-gray-700 w-full">
-      <h1
-        class="text-white text-right text-sm flex items-center justify-end p-5"
-      >
+  <body class="bg-[#19705E]">
+    <div class="bg-[#02EAD0] w-full">
+      <h1 class="text-black text-right text-xl flex items-center justify-end p-5">
         <span>Thai (TH)</span>
         <svg
           width="20"
@@ -56,51 +54,39 @@
     </div>
 
     <main class="min-h-screen flex justify-center">
-      <div
-        class="min-h-screen flex flex-col items-center justify-center bg-gray-700"
-      >
+      <div class="min-h-screen flex flex-col items-center justify-center bg-[#116860]">
         <div class="flex flex-col items-center mb-8">
-          <img src="loaluay.png" alt="Icon" class="w-[25%]" />
+          <img src="loaluay.png" alt="Icon" class="w-[25%] mb-4" />
         </div>
-        <div class="bg-gray-700 p-8 w-full max-w-md">
-          <h2 class="text-2xl font-bold mb-6 text-center text-white font-kanit">
+        <div class="bg-[#208D83] border border-[#02EAD0] p-8 w-full max-w-md rounded-lg shadow-lg">
+          <h2 class="text-4xl font-bold mb-6 text-center text-[#FFFB00] font-kanit">
             ลงชื่อเข้าใช้
           </h2>
-          <h1
-            class="text-sm font-bold mb-6 text-center text-gray-400 font-kanit"
-          >
+          <h1 class="text-md font-extrabold mb-6 text-center text-white font-kanit">
             เข้าสู่ระบบหรือสมัครสมาชิก
           </h1>
 
           <form onsubmit="handleSubmit(event)">
             <div class="mb-4">
-              <label
-                for="email"
-                class="block text-sm font-medium text-white font-kanit"
-                >ที่อยู่อีเมลหรือผู้ใช้งาน</label
-              >
+              <label for="email" class="block text-xl font-extrabold text-white font-kanit">ที่อยู่อีเมลหรือผู้ใช้งาน</label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 required
-                class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="mt-1 p-2 w-full border border-gray-600 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400"
               />
             </div>
 
             <div class="mb-4">
-              <label
-                for="password"
-                class="block text-sm font-medium text-white font-kanit"
-                >รหัสผ่าน</label
-              >
+              <label for="password" class="block text-xl font-extrabold text-white font-kanit">รหัสผ่าน</label>
               <input
                 type="password"
                 id="password"
                 name="password"
                 required
                 oninput="validatePassword()"
-                class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="mt-1 p-2 w-full border border-gray-600 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400"
               />
             </div>
 
@@ -110,44 +96,31 @@
                   type="checkbox"
                   id="remember"
                   name="remember"
-                  class="h-4 w-4 text-blue-600"
+                  class="h-4 w-4 text-yellow-600 focus:ring-yellow-500"
                 />
-                <label
-                  for="remember"
-                  class="block text-sm font-medium text-white font-kanit p-2"
-                  >จดจำฉันไว้</label
-                >
+                <label for="remember" class="block text-md font-medium text-gray-200 font-kanit p-2">จดจำฉันไว้</label>
               </div>
-              <a
-                href="#"
-                class="text-green-500 hover:text-blue-800 text-sm font-kanit"
-                >ลืมรหัสผ่าน?</a
-              >
+              <a href="#" class="text-yellow-500 hover:text-yellow-400 text-sm font-kanit">ลืมรหัสผ่าน?</a>
             </div>
 
             <button
               type="submit"
-              class="w-full text-white py-2 rounded-md font-semibold hover:bg-blue-700 font-kanit"
-              style="
-                background: linear-gradient(to right, #22c55e 0%, #f8bb54 100%);
-              "
+              class="w-full text-white py-2 rounded-md font-semibold hover:bg-yellow-600 transition-all duration-300 ease-in-out"
+              style="background: linear-gradient(to right, #22c55e 0%, #f8bb54 100%);"
             >
               เข้าสู่ระบบ
             </button>
 
             <div class="flex items-center justify-center my-8">
               <div class="border-t border-gray-400 flex-grow mr-2"></div>
-              <span
-                class="text-center font-bold text-sm text-gray-400 font-kanit"
-                >หรือเข้าสู่ระบบด้วย</span
-              >
+              <span class="text-center font-bold text-md text-white font-kanit">หรือเข้าสู่ระบบด้วย</span>
               <div class="border-t border-gray-400 flex-grow ml-2"></div>
             </div>
 
             <div class="flex justify-center mb-5">
               <button
                 type="button"
-                class="w-full text-gray-500 py-3 rounded-md bg-white text-sm hover:bg-gray-500 flex items-center justify-center"
+                class="w-full text-black py-3 rounded-md bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out"
               >
                 <div class="pr-2">
                   <img src="ggImg.svg" alt="Google Logo" class="w-5 h-5" />
@@ -159,7 +132,7 @@
             <div class="flex justify-center mb-5">
               <button
                 type="button"
-                class="w-full text-gray-500 py-3 rounded-md bg-white text-sm hover:bg-gray-500 flex items-center justify-center"
+                class="w-full text-black py-3 rounded-md bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out"
               >
                 <div class="pr-4">
                   <img src="line.svg" alt="Line Logo" class="w-5 h-5" />
@@ -169,17 +142,13 @@
             </div>
 
             <div class="flex items-center justify-center my-8">
-              <h1 class="text-white text-sm pr-1">ยังไม่มีบัญชี?</h1>
-              <a href="../register.html" class="text-green-600 text-sm"
-                >สมัครสมาชิก</a
-              >
+              <h1 class="text-white text-md pr-1">ยังไม่มีบัญชี?</h1>
+              <a href="../register.html" class="text-[#FFFB00] text-sm">สมัครสมาชิก</a>
             </div>
           </form>
         </div>
       </div>
-      <div
-        class="image-section hidden md:flex justify-center items-center bg-gray-600 min-h-full"
-      >
+      <div class="image-section hidden md:flex justify-center items-center bg-[#2BA89C] min-h-full">
         <img src="loaluay.png" alt="Icon" class="w-[50%]" />
       </div>
     </main>
