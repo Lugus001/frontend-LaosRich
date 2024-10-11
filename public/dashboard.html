@@ -42,7 +42,7 @@
                     <div class="stat-box bg-white rounded-lg shadow-md p-5 text-center w-full border border-gray-400 transition-transform transform hover:scale-105">
                         <h2 class="text-lg font-bold">ค่า commission</h2>
                         <p class="text-gray-500">ยอดที่ได้</p>
-                        <p class="text-xl font-semibold">17.489</p>
+                        <p class="text-xl font-semibold" id="allSharedAmount"></p>                        
                         <button class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
                             เช็คประวัติ 
                         </button> 
@@ -67,22 +67,51 @@
     </div>
 
     <script>
-        // Toggle sidebar visibility
-        const toggleSidebarButton = document.getElementById('toggleSidebar');
-        const sidebar = document.getElementById('sidebar');
-
-        toggleSidebarButton.addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
-        });
-
-        const currentDate = new Date().toLocaleDateString('th-TH', {
-            day: 'numeric',
-            year: 'numeric',
-            month: 'long',
-        });
-
-        const dateElement = document.getElementById('currentDate');
-        dateElement.textContent = currentDate;
+        async function fetchData() {
+            try {
+                const token = localStorage.getItem('token'); 
+        
+                if (!token) {
+                    throw new Error('No token found');
+                }
+        
+                const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/orders', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` 
+                    }
+                });
+        
+                const data = await response.json();
+        
+                if (response.ok) {
+                    // Assuming 'all_shared' is part of the returned data
+                    const allSharedAmount = data.all_shared;
+    
+                    // Check if all_shared exists and display it
+                    if (allSharedAmount !== undefined) {
+                        document.getElementById('allSharedAmount').textContent = allSharedAmount;
+                    } else {
+                        document.getElementById('allSharedAmount').textContent = 'No data available';
+                    }
+    
+                    console.log('Response data:', data);
+                    
+                } else {
+                    console.error('Error fetching data:', data.message);
+                    document.getElementById('statusOrder').innerHTML = `<p class="text-red-500">Error fetching data</p>`;
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                document.getElementById('statusOrder').innerHTML = `<p class="text-red-500">There was a problem fetching the data.</p>`;
+            }
+        }
+        
+        fetchData();
     </script>
+    
+    
+   
 </body>
 </html>
