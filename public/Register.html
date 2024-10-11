@@ -59,25 +59,33 @@
             </div>
             <div class="flex flex-col">
               <label for="phone" class="block text-md font-medium text-white">เบอร์โทรศัพท์ผู้สมัคร</label>
-              <div class="flex mt-1">
-                <select
-                  id="phone_prefix"
-                  name="phone_prefix"
-                  class="border border-gray-300 rounded-l-md p-2 w-1/4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="+66">+66 ไทย</option>
-                  <option value="+856">+856 ลาว</option>
-                </select>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  required
-                  class="border border-gray-300 rounded-r-md p-2 w-3/4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="กรุณาใส่เบอร์โทรศัพท์"
-                />
+              <div class="relative mt-1">
+                  <div class="border border-gray-300 rounded-md flex bg-white">
+                      <div class="flex items-center p-2  cursor-pointer" id="phone_prefix">
+                          <img src="th.svg" class="w-4 h-4 mr-1" />
+                      </div>
+                      <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          required
+                          class="border border-gray-300 rounded-r-md p-2 w-3/4 focus:ring-2 "
+                          placeholder="กรุณาใส่เบอร์โทรศัพท์"
+                      />
+                  </div>
+                  <!-- Dropdown options -->
+                  <div class="absolute left-0 right-0 mt-1 bg-white border border-gray-300 rounded-md hidden" id="dropdown-options">
+                      <div class="flex items-center p-2 cursor-pointer" onclick="selectOption('+66', 'th.svg')">
+                          <img src="th.svg" class="w-4 h-4 mr-1" />
+                          <span>+66 ไทย</span>
+                      </div>
+                      <div class="flex items-center p-2 cursor-pointer" onclick="selectOption('+856', 'laos.svg')">
+                        <img src="laos.svg" class="w-4 h-4 mr-1" />
+                          <span>+856 ลาว</span>
+                      </div>
+                  </div>
               </div>
-            </div>
+          </div>
             <div class="flex flex-col">
               <label for="email" class="block text-md font-medium text-white">Email</label>
               <input
@@ -205,8 +213,8 @@
 
       form.addEventListener("submit", async function (e) {
   e.preventDefault();
-
-  const phone_prefix = document.getElementById("phone_prefix").value;
+  const phone_prefix_span = document.querySelector("#phone_prefix span");
+  const phone_prefix = phone_prefix_span ? phone_prefix_span.textContent.trim() : '';
   const phone = document.getElementById("phone").value;
   const email = document.getElementById("email").value;
   const first_name = document.getElementById("first_name").value;
@@ -215,7 +223,7 @@
   const password = document.getElementById("password").value;
   const username = document.getElementById("username").value;
 
-  if (!username || !password || !phone || !region) {
+  if (!username || !password || !phone || !phone_prefix || !region) {
     Swal.fire('Missing Fields', 'Please fill in all required fields.', 'error');
     return;
   }
@@ -294,5 +302,28 @@
     fetchOrderData();
 
     </script>
+    <script>
+      const phonePrefix = document.getElementById('phone_prefix');
+      const dropdown = document.getElementById('dropdown-options');
+  
+      phonePrefix.addEventListener('click', () => {
+          dropdown.classList.toggle('hidden');
+      });
+  
+      function selectOption(prefix, imgSrc) {
+          phonePrefix.innerHTML = `
+              ${imgSrc ? `<img src="${imgSrc}" class="w-4 h-4 mr-1" />` : ''}
+              <span>${prefix}</span>
+          `;
+          dropdown.classList.add('hidden');
+      }
+  
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (event) => {
+          if (!phonePrefix.contains(event.target) && !dropdown.contains(event.target)) {
+              dropdown.classList.add('hidden');
+          }
+      });
+  </script>
   </body>
 </html>

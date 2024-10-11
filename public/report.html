@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-5">
+        <h1 class="text-2xl font-bold text-center mb-5">รายงาน Commission</h1>
+
+        <div id="summary" class="bg-white shadow-md rounded p-5 mb-5">
+            <p class="text-lg font-semibold">User Code: <span id="user_code">Loading...</span></p>
+            <p class="text-lg font-semibold">Agent Code: <span id="agent_code">Loading...</span></p>
+            <p class="text-lg font-semibold">ค่า commission: <span id="all_shared">Loading...</span></p>
+            <p class="text-lg font-semibold">ค่า commission ที่เหลืออยู่: <span id="all_shared_pending">Loading...</span></p>
+        </div>
+
+        <h2 class="text-xl font-semibold mb-3">Data Table</h2>
+        <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th>User Code</th>
+                    <th>Agent Code</th>
+                    <th>Total Shared</th>
+                    <th>Total Shared Pending</th>
+                    <th>Total Shared Reported</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="user_code_td">Loading...</td>
+                    <td id="agent_code_td">Loading...</td>
+                    <td id="all_shared_td">Loading...</td>
+                    <td id="all_shared_pending_td">Loading...</td>
+                    <td id="all_shared_reported_td">Loading...</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="mt-5 text-center">
+            <button class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600" onclick="exportToExcel()">
+                Export to Excel
+            </button>
+        </div>
+    </div>
+
+    <script>
+        async function fetchData() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('No token found');
+                }
+
+                const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/orders', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+
+                const data = await response.json();
+                populateData(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        function populateData(data) {
+            document.getElementById("user_code").textContent = data.user_code;
+            document.getElementById("agent_code").textContent = data.agent_code;
+            document.getElementById("all_shared").textContent = data.all_shared;
+            document.getElementById("all_shared_pending").textContent = data.all_shared_pending;
+            document.getElementById("all_shared_reported").textContent = data.all_shared_reported;
+
+            // Populate table cells
+            document.getElementById("user_code_td").textContent = data.user_code;
+            document.getElementById("agent_code_td").textContent = data.agent_code;
+            document.getElementById("all_shared_td").textContent = data.all_shared;
+            document.getElementById("all_shared_pending_td").textContent = data.all_shared_pending;
+            document.getElementById("all_shared_reported_td").textContent = data.all_shared_reported;
+        }
+
+        function exportToExcel() {
+            const table = document.querySelector("table");
+            let rows = Array.from(table.rows);
+            let csvContent = rows.map(row => Array.from(row.cells).map(cell => cell.textContent).join(",")).join("\n");
+
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", "report.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        window.onload = fetchData;
+    </script>
+</body>
+</html>
