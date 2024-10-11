@@ -9,6 +9,7 @@ import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
 import Logo from '../../assets/logo/logo.svg';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
 const SideBar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -87,6 +88,14 @@ const SideBar = () => {
                 setSelected={setSelected}
                 >
                 Messages
+              </MenuItem>
+              <MenuItem
+                to="/settings" 
+                icon={<SettingsOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+                >
+                settings
               </MenuItem>
             </Box>
           )}

@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 import Order from './pages/Order';
 import Shop from './pages/Shop';
 import Test from './pages/Test';
+import Settings  from './pages/Settings';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/messages',
         element: <Messages />,
+      },
+      {
+        path: '/settings',
+        element: <Settings/>,
       },
       {
         path: '/test',

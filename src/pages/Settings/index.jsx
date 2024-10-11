@@ -21,26 +21,17 @@ const Index = () => {
             <Typography className="ml-2 text-lg font-medium">วันที่ {currentDate}</Typography>
           </Box>
           <Box className="flex flex-col md:flex-row md:justify-between md:items-center rounded-md pl-3">
-            <Button variant="contained" color="success" className="flex items-center ">
-              <AddIcon className="text-white" />
-              <Typography className="text-white ml-2">แก้ไขสมาชิก</Typography>
-            </Button>
           </Box>
         </Box>
         <Box className="bg-white p-5">
           <Box className="pt-5 pl-5">
-            <Typography variant="h5" fontWeight="bold">สมาชิก</Typography>
+            <Typography variant="h5" fontWeight="bold">การตั้งค่าบัญชี</Typography>
             <Box className="border border-gray-200"></Box>
           </Box>       
           <Box className="p-3 lg:p-[2rem]">
-          <MemberList
-            number=''
-            tel=''
-            email=''
-            name=''
-            region=''
-            status=''
-            />
+          <Box className="bg-white border border-gray-200 rounded-xl p-[2rem]">
+            
+          </Box>
             
         </Box>
 
