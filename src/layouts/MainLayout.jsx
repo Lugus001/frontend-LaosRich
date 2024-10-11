@@ -4,11 +4,10 @@ import SideBar from '../pages/global/Sidebar';
 import Topbar from '../pages/global/Topbar';
 
 const MainLayout = () => {
-  const [isSidebar, setIsSidebar] = useState(true);
 
   return (
     <div className="flex h-screen">
-      {isSidebar && <SideBar />}
+      {<SideBar />}
 
       <div className="flex flex-col flex-1">
         <Topbar />

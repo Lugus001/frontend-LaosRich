@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import RequireAuth from './components/etc/RequireAuth';
 import MainLayout from './layouts/MainLayout';
 import Dashboard from './pages/Dashboard';
@@ -8,17 +8,21 @@ import NotFound from './pages/NotFound';
 import Order from './pages/Order';
 import Shop from './pages/Shop';
 import Test from './pages/Test';
-import Settings  from './pages/Settings';
+import Settings from './pages/Settings';
+import AuthLayout from './layouts/AuthLayout'; 
+import Login from './pages/Auth/Login';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
+      <RequireAuth>
         <MainLayout />
+      </RequireAuth>
     ),
     children: [
       {
-        path: '/',
+        path: '',
         element: <Dashboard />,
       },
       {
@@ -39,7 +43,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/settings',
-        element: <Settings/>,
+        element: <Settings />,
       },
       {
         path: '/test',
@@ -48,9 +52,23 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: '/auth',
+    element: <AuthLayout />,
+    children: [
+      {
+        path: '',
+        element: <Navigate to="login" />, 
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+    ],
+  },
+  {
     path: '*',
     element: <NotFound />,
-  }
+  },
 ]);
 
 const App = () => {
