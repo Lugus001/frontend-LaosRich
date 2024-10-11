@@ -65,10 +65,8 @@
                   name="phone_prefix"
                   class="border border-gray-300 rounded-l-md p-2 w-1/4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
-                  <option value="+66">+66 (Thailand)</option>
-                  <option value="+1">+1 (USA)</option>
-                  <option value="+44">+44 (UK)</option>
-                  <option value="+91">+91 (India)</option>
+                  <option value="+66">+66 ไทย</option>
+                  <option value="+856">+856 ลาว</option>
                 </select>
                 <input
                   type="tel"
@@ -203,6 +201,7 @@
       }
 
       const form = document.getElementById("registerForm");
+    
 
       form.addEventListener("submit", async function (e) {
   e.preventDefault();
@@ -216,7 +215,6 @@
   const password = document.getElementById("password").value;
   const username = document.getElementById("username").value;
 
-  // Validate that all required fields are filled
   if (!username || !password || !phone || !region) {
     Swal.fire('Missing Fields', 'Please fill in all required fields.', 'error');
     return;
@@ -257,6 +255,43 @@
     Swal.fire('Error', 'There was a problem with your request.', 'error');
   }
 });
+
+    </script>
+    <script>
+      async function fetchOrderData() {
+        try {
+          const token = localStorage.getItem('token'); 
+          if (!token) {
+                    throw new Error('No token found');
+                }
+
+          const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/orders', {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const agentCode = data.agent_code; 
+        console.log(`Agent Code: ${agentCode}`);
+
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?agent_code=${agentCode}`;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+
+        
+    } catch (error) {
+        console.error("Error fetching order data:", error);
+    }
+}
+    fetchOrderData();
 
     </script>
   </body>

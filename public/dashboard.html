@@ -86,10 +86,8 @@
                 const data = await response.json();
         
                 if (response.ok) {
-                    // Assuming 'all_shared' is part of the returned data
                     const allSharedAmount = data.all_shared;
     
-                    // Check if all_shared exists and display it
                     if (allSharedAmount !== undefined) {
                         document.getElementById('allSharedAmount').textContent = allSharedAmount;
                     } else {
