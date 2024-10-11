@@ -1,9 +1,7 @@
-import React from 'react'
-
+import React from "react";
+import { Box, Button, FormControl, Typography } from "@mui/material";
 const index = () => {
-  return (
-    <div>messages</div>
-  )
-}
+  return <Box className="p-5 bg-gray-100 min-h-screen"></Box>;
+};
 
-export default index
+export default index;

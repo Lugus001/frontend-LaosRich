@@ -1,35 +1,35 @@
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { Box, IconButton, Typography } from "@mui/material";
-import React, { useState } from 'react';
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar"; 
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import React, { useState } from "react";
+import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "react-pro-sidebar/dist/css/styles.css";
-import DashboardIcon from '../../assets/icon/dashIcon.svg';
-import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
-import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
-import Logo from '../../assets/logo/logo.svg';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import DashboardIcon from "../../assets/icon/dashIcon.svg";
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import TaskOutlinedIcon from "@mui/icons-material/TaskOutlined";
+import loaluay from "../../assets/logo/loaluay.png";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 const SideBar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const handleMenuItemClick = (path) => {
-    setSelected(path); // Update selected path
-    navigate(path); // Navigate to the selected path
+    setSelected(path);
+    navigate(path);
   };
 
   return (
-    <Box className='min-h-full bg-slate-800'>
+    <Box className="min-h-full bg-slate-800">
       <ProSidebar collapsed={isCollapsed}>
-        <Menu iconShape="square" className='min-h-full bg-slate-800'>
+        <Menu iconShape="square" className="min-h-full bg-slate-800">
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            className='mt-[10px] mb-[20px]'
+            className="mt-[10px] mb-[20px]"
           >
             {!isCollapsed && (
               <Box
@@ -38,7 +38,7 @@ const SideBar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <img src={Logo} alt="Logo" className="w-[35px]" />
+                <img src={loaluay} alt="Logo" className="w-[35px]" />
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon className="text-white" />
                 </IconButton>
@@ -49,11 +49,11 @@ const SideBar = () => {
           {!isCollapsed && (
             <Box paddingLeft={isCollapsed ? undefined : "10%"}>
               <Typography className="text-white"> MENU</Typography>
-              
+
               <MenuItem
                 icon={<img src={DashboardIcon} alt="dashboard" />}
                 active={selected === "Dashboard"} // Highlight the selected item
-                onClick={() => handleMenuItemClick('/')} // Use onClick to navigate
+                onClick={() => handleMenuItemClick("/")} // Use onClick to navigate
               >
                 Dashboard
               </MenuItem>
@@ -61,7 +61,7 @@ const SideBar = () => {
               <MenuItem
                 icon={<Inventory2OutlinedIcon />}
                 active={selected === "Shop"}
-                onClick={() => handleMenuItemClick('/shop')}
+                onClick={() => handleMenuItemClick("/shop")}
               >
                 ร้านค้าตนเอง
               </MenuItem>
@@ -69,7 +69,7 @@ const SideBar = () => {
               <MenuItem
                 icon={<TaskOutlinedIcon />}
                 active={selected === "Order"}
-                onClick={() => handleMenuItemClick('/order')}
+                onClick={() => handleMenuItemClick("/order")}
               >
                 คำสั่งซื้อ
               </MenuItem>
@@ -77,7 +77,7 @@ const SideBar = () => {
               <MenuItem
                 icon={<PeopleAltOutlinedIcon />}
                 active={selected === "Member"}
-                onClick={() => handleMenuItemClick('/member')}
+                onClick={() => handleMenuItemClick("/member")}
               >
                 สมาชิก
               </MenuItem>
@@ -85,15 +85,15 @@ const SideBar = () => {
               <MenuItem
                 icon={<ForumOutlinedIcon />}
                 active={selected === "Messages"}
-                onClick={() => handleMenuItemClick('/messages')}
+                onClick={() => handleMenuItemClick("/messages")}
               >
                 Messages
               </MenuItem>
-              
+
               <MenuItem
                 icon={<SettingsOutlinedIcon />}
                 active={selected === "Settings"}
-                onClick={() => handleMenuItemClick('/settings')}
+                onClick={() => handleMenuItemClick("/settings")}
               >
                 Settings
               </MenuItem>
@@ -103,6 +103,6 @@ const SideBar = () => {
       </ProSidebar>
     </Box>
   );
-}
+};
 
 export default SideBar;

@@ -1,72 +1,76 @@
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import RequireAuth from './components/etc/RequireAuth';
-import MainLayout from './layouts/MainLayout';
-import Dashboard from './pages/Dashboard';
-import Member from './pages/Member';
-import Messages from './pages/Messages';
-import NotFound from './pages/NotFound';
-import Order from './pages/Order';
-import Shop from './pages/Shop';
-import Test from './pages/Test';
-import Settings from './pages/Settings';
-import AuthLayout from './layouts/AuthLayout'; 
-import Login from './pages/Auth/Login';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
+import RequireAuth from "./components/etc/RequireAuth";
+import MainLayout from "./layouts/MainLayout";
+import Dashboard from "./pages/Dashboard";
+import Member from "./pages/Member";
+import Messages from "./pages/Messages";
+import NotFound from "./pages/NotFound";
+import Order from "./pages/Order";
+import Shop from "./pages/Shop";
+import Test from "./pages/Test";
+import Settings from "./pages/Settings";
+import AuthLayout from "./layouts/AuthLayout";
+import Login from "./pages/Auth/Login";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: (
-      <RequireAuth>
-        <MainLayout />
-      </RequireAuth>
+      //<RequireAuth>
+      <MainLayout />
+      //</RequireAuth>
     ),
     children: [
       {
-        path: '',
+        path: "",
         element: <Dashboard />,
       },
       {
-        path: '/shop',  
+        path: "/shop",
         element: <Shop />,
       },
       {
-        path: '/order',
+        path: "/order",
         element: <Order />,
       },
       {
-        path: '/member',
+        path: "/member",
         element: <Member />,
       },
       {
-        path: '/messages',
+        path: "/messages",
         element: <Messages />,
       },
       {
-        path: '/settings',
+        path: "/settings",
         element: <Settings />,
       },
       {
-        path: '/test',
+        path: "/test",
         element: <Test />,
       },
     ],
   },
   {
-    path: '/auth',
+    path: "/auth",
     element: <AuthLayout />,
     children: [
       {
-        path: '',
-        element: <Navigate to="login" />, 
+        path: "",
+        element: <Navigate to="login" />,
       },
       {
-        path: 'login',
+        path: "login",
         element: <Login />,
       },
     ],
   },
   {
-    path: '*',
+    path: "*",
     element: <NotFound />,
   },
 ]);
