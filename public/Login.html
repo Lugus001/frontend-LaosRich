@@ -164,7 +164,7 @@
           if (response.ok) {
             console.log(data);
             localStorage.setItem('token', data.token);
-            Swal.fire('Login Successful', 'Welcome!', 'success');
+            Swal.fire('เข้าสู่ระบบสำเร็จ', 'ยินดีต้อนรับ!', 'success');
             window.location.href='/dashboard.html';
           } else {
             Swal.fire('Login Failed', data.message || 'An error occurred', 'error');

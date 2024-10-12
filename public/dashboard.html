@@ -23,27 +23,54 @@
             <i class="fa fa-cog"></i>
         </button>
     </div>
-
     <div class="main-content flex-1 p-4 md:p-8 lg:p-10 xl:p-12 flex flex-col">
         <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 bg-slate-400">
 
-             <!-- User Profile Section  -->
-             <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full">
-                <div class="stat-box rounded-lg shadow-lg p-5 text-center w-full border border-gray-300 transition-transform transform hover:scale-105">
-                    <div class="text-center">
-                        <img id="profileImage" src="test-image.jpg" alt="Profile" class="rounded-full w-24 h-24 mb-4">
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full p-3 ">
+                <div class="stat-box rounded-lg shadow-lg w-full border border-gray-300 transition-transform transform hover:scale-105 relative">
+
+                    <div class="bg-gradient-to-r from-purple-300 to-yellow-300 rounded-t-lg p-5 text-center">
+                        <div class="flex justify-end">
+                            <a href="/editUser.html" class="w-[60%] text-black py-2 rounded-md font-semibold  text-center inline-block p-4">
+                                <button type="submit" class="w-[60%] text-black py-2 rounded-md font-semibold bg-gray-100 border border-gray-200 hover:bg-blue-200 p-4">
+                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                    แก้ไขข้อมูล 
+                                </button>
+                            </a>
+                        </div>
+                        <div class="text-center pl-5">
+                            <img id="profileImage" src="test-image.jpg" alt="Profile" class="rounded-full w-24 h-24 mb-4 mx-auto">
+                        </div>
                     </div>
-                    <div class="flex justify-end">
-                        <button type="submit" class="w-[60%] text-black py-2 rounded-md font-semibold hover:bg-blue-200">
-                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                            แก้ไขข้อมูล 
-                        </button>
+                    <div class="bg-white rounded-b-lg flex flex-col md:flex-row p-5">
+                        <div class="flex flex-col mb-4 md:mb-0 md:mr-4 md:items-start md:p-5">
+                            <div class="flex justify-start space-x-2">
+                                <div id="first_name" class="text-xl font-medium"></div>
+                                <div id="last_name" class="text-xl font-medium"></div>
+                            </div>
+                            <div id="email" class="text-sm font-small"></div>
+                        </div>
+                        <div class="flex flex-col mb-4 md:mb-0 md:mr-4 md:items-start md:p-5">
+                            <p class="text-gray-400 text-sm font-small">เบอร์โทรศัพท์</p>
+                            <div id="phone" class="text-xl font-medium"></div>
+                        </div>
+                        <div class="flex flex-col mb-4 md:mb-0 md:mr-4 md:items-start md:p-5">
+                            <p class="text-gray-400 text-sm font-small">สัญชาติ</p>
+                            <div id="region" class="text-xl font-medium"></div>
+                        </div>
+                        <div class="flex flex-col mb-4 md:mb-0 md:mr-4 md:items-start md:p-5">
+                            <p class="text-gray-400 text-sm font-small">Agent Code</p>
+                            <div id="agent_code" class="text-xl font-medium"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
+
+            </div>
+
             <!-- Commission Section  -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full">
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full p-3 ">
                 <div class="stat-box rounded-lg shadow-lg p-5 text-center w-full border border-gray-300 transition-transform transform hover:scale-105">
                     <div class="flex items-center pb-2 space-x-2"> 
                         <i class="fa fa-money" aria-hidden="true"></i>
@@ -55,7 +82,7 @@
                         <p>บาท</p>
                     </div>
                     <div class="flex justify-end">
-                        <a href="report.html" class="w-[60%] text-black py-2 rounded-md font-semibold hover:bg-blue-200 text-center inline-block">
+                        <a href="/report.html" class="w-[60%] text-black py-2 rounded-md font-semibold hover:bg-blue-200 text-center inline-block">
                             <i class="fa fa-file-text-o" aria-hidden="true"></i>
                             เช็คประวัติ 
                         </a>
@@ -63,20 +90,20 @@
                 </div>
             </div>
 
-            <!-- Lao Ruay Link Section  -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full">
-                <div class="stat-box bg-white rounded-lg shadow-lg p-5 text-center w-full border border-gray-300 transition-transform transform hover:scale-105">
-                    <img src="img.png" alt="laoruayPage" class="w-full">
-                    <a href="https://laoruay.com/" target="_blank" rel="noopener noreferrer">
-                        <div class="p-5">
-                            <h2 class="text-black text-2xl rounded-2xl pt-4">เข้าสู่ Lao Ruay</h2>
-                            <button type="submit" class="w-[60%]  py-2 rounded-md font-semibold text-red-500 ">
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full p-2  ">
+                <div class="stat-box relative rounded-lg shadow-lg text-center w-full border border-gray-300 transition-transform transform hover:scale-105 ">
+                    <img src="img.png" alt="laoruayPage" class="w-full rounded-lg opacity-100"> 
+                    <a href="https://laoruay.com/" target="_blank" rel="noopener noreferrer" class="absolute inset-0 flex flex-col items-center justify-center pl-5 pr-5">
+                        <div class="p-5 bg-white bg-opacity-60 rounded-lg w-full"> 
+                            <h2 class="text-black text-2xl rounded-2xl pt-6 ">เข้าสู่ Lao Ruay</h2>
+                            <button type="submit" class="w-[60%] py-2 rounded-md font-bold text-red-500 text-2xl">
                                 คลิกที่นี่ 
                             </button>
                         </div>
                     </a>
                 </div>
             </div>
+            
 
             
         </div>
@@ -126,41 +153,39 @@
     </script>
      <script>
         async function fetchOrderData() {
-          try {
-            const token = localStorage.getItem('token'); 
-            if (!token) {
-                      throw new Error('No token found');
-                  }
-  
-            const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/orders', {
-              method: 'GET', 
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}` 
-  
-              },
-          });
-  
-          if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-  
-          const data = await response.json();
-  
-          const agentCode = data.agent_code; 
-          console.log(`Agent Code: ${agentCode}`);
-  
-          const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?agent_code=${agentCode}`;
-          window.history.pushState({ path: newUrl }, '', newUrl);
-  
-          
-      } catch (error) {
-          console.error("Error fetching order data:", error);
-      }
-  }
-      fetchOrderData();
-  
-      </script>
+            try {
+                const token = localStorage.getItem('token'); 
+                if (!token) {
+                    throw new Error('No token found');
+                }
+    
+                const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/orders', {
+                    method: 'GET', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` 
+                    },
+                });
+    
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+    
+                const data = await response.json();
+                const agentCode = data.agent_code; 
+                console.log(`Agent Code: ${agentCode}`);
+    
+                // Update the URL to include /dashboard.html
+                const newUrl = `${window.location.protocol}//${window.location.host}/register.html/?agent_code=${agentCode}/dashboard.html`;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+    
+            } catch (error) {
+                console.error("Error fetching order data:", error);
+            }
+        }
+        fetchOrderData();
+    </script>
+    
    <script>
         function displayImage(event) {
             const file = event.target.files[0];
@@ -180,7 +205,80 @@
             }
         }
     </script>
-    
+    <script>
+     async function fetchUserData() {
+    try {
+        const token = localStorage.getItem('token'); 
+        if (!token) {
+            throw new Error('No token found');
+        }
+
+        const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/me', {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            },
+        });
+
+        const data = await response.json(); 
+
+        if (response.ok) {
+            const { first_name, last_name, email, phone, region, agent_code } = data.user; 
+
+            if (first_name) {
+                document.getElementById('first_name').textContent = ` ${first_name}`;  
+            } else {
+                document.getElementById('first_name').textContent = 'ชื่อไม่พร้อมใช้งาน';
+            }
+
+            if (last_name) {
+                document.getElementById('last_name').textContent = `${last_name}`; 
+            } else {
+                document.getElementById('last_name').textContent = 'นามสกุลไม่พร้อมใช้งาน'; 
+            }
+
+            if (email) {
+                document.getElementById('email').textContent = `${email}`; 
+            } else {
+                document.getElementById('email').textContent = 'email ไม่พร้อมใช้งาน'; 
+            }
+
+           
+            if (phone) {
+                document.getElementById('phone').textContent = `${phone}`; 
+            } else {
+                document.getElementById('phone').textContent = 'phone ไม่พร้อมใช้งาน'; 
+            }
+            
+            if (region) {
+                document.getElementById('region').textContent = `${region}`; 
+            } else {
+                document.getElementById('region').textContent = 'region ไม่พร้อมใช้งาน'; 
+            }
+
+            if (agent_code) {
+                document.getElementById('agent_code').textContent = `${agent_code}`; 
+            } else {
+                document.getElementById('agent_code').textContent = 'agent_code ไม่พร้อมใช้งาน'; 
+            }
+
+            console.log('Response data:', { first_name, last_name , email, phone, region, agent_code });
+        } else {
+            throw new Error(data.message || 'Error fetching user data');
+        }
+
+    } catch (error) {
+        console.error("Error fetching User data:", error);
+        document.getElementById('error-message').innerText = error.message;
+    }
+}
+
+fetchUserData();
+
+
+    </script>
+
    
 </body>
 </html>

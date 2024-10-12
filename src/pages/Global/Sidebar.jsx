@@ -6,10 +6,8 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "react-pro-sidebar/dist/css/styles.css";
 import DashboardIcon from "../../assets/icon/dashIcon.svg";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
-import TaskOutlinedIcon from "@mui/icons-material/TaskOutlined";
 import loaluay from "../../assets/logo/loaluay.png";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 const SideBar = () => {
@@ -52,8 +50,8 @@ const SideBar = () => {
 
               <MenuItem
                 icon={<img src={DashboardIcon} alt="dashboard" />}
-                active={selected === "Dashboard"} // Highlight the selected item
-                onClick={() => handleMenuItemClick("/")} // Use onClick to navigate
+                active={selected === "Dashboard"} 
+                onClick={() => handleMenuItemClick("/")} 
               >
                 Dashboard
               </MenuItem>
@@ -63,16 +61,10 @@ const SideBar = () => {
                 active={selected === "Shop"}
                 onClick={() => handleMenuItemClick("/shop")}
               >
-                ร้านค้าตนเอง
+                รายงานการขาย
               </MenuItem>
 
-              <MenuItem
-                icon={<TaskOutlinedIcon />}
-                active={selected === "Order"}
-                onClick={() => handleMenuItemClick("/order")}
-              >
-                คำสั่งซื้อ
-              </MenuItem>
+              
 
               <MenuItem
                 icon={<PeopleAltOutlinedIcon />}
@@ -81,15 +73,6 @@ const SideBar = () => {
               >
                 สมาชิก
               </MenuItem>
-
-              <MenuItem
-                icon={<ForumOutlinedIcon />}
-                active={selected === "Messages"}
-                onClick={() => handleMenuItemClick("/messages")}
-              >
-                Messages
-              </MenuItem>
-
               <MenuItem
                 icon={<SettingsOutlinedIcon />}
                 active={selected === "Settings"}

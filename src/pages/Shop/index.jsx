@@ -1,17 +1,10 @@
+import { Box, Button, Select, MenuItem, Typography } from "@mui/material";
+import React, { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add'; 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { Box, Button, FormControl, Typography } from "@mui/material";
-import NativeSelect from '@mui/material/NativeSelect';
-import React from 'react';
+import * as XLSX from 'xlsx'; // Import the xlsx library
 import '../../../src/index.css';
-import Header from '../../components/Header';
 import StatBox from "../../components/StatBox";
-import LineChart from '../../components/LineChart';
-import Catagory from '../../components/Catagory';
-import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
-import PermMediaOutlinedIcon from '@mui/icons-material/PermMediaOutlined';
-import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
-import ViewInArOutlinedIcon from '@mui/icons-material/ViewInArOutlined';
 
 const Index = () => {
     const currentDate = new Date().toLocaleDateString('th-TH', {
@@ -20,65 +13,138 @@ const Index = () => {
         month: 'long',
     });
 
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    
+    const salesData = [
+        { id: 1, date: '01/10/2024', picture: 'NFT Coin 01', amount: 500, buyer: 'Buyer A' },
+        { id: 2, date: '02/10/2024', picture: 'NFT Coin 01', amount: 800, buyer: 'Buyer B' },
+        { id: 3, date: '03/10/2024', picture: 'NFT Coin 01', amount: 600, buyer: 'Buyer C' },
+    ];
+
+    // Filter data based on selected date range
+    const filteredData = salesData.filter(item => {
+        const itemDate = new Date(item.date);
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        return (!startDate || itemDate >= start) && (!endDate || itemDate <= end);
+    });
+
+    const handlePrintReport = () => {
+        console.log(`Print report from ${startDate} to ${endDate}`);
+        console.log(filteredData);
+    };
+
+    // Function to export data to Excel
+    const exportToExcel = () => {
+        const ws = XLSX.utils.json_to_sheet(filteredData.map(({ id, date, amount, buyer }) => ({
+            ID: id,
+            Date: date,
+            Amount: amount,
+            Buyer: buyer,
+        })));
+
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Sales Data");
+
+        // Generate the Excel file and trigger download
+        XLSX.writeFile(wb, `Sales_Report_${new Date().toISOString().slice(0, 10)}.xlsx`);
+    };
+
     return (
         <Box className="p-5 bg-gray-100 min-h-screen">
-            {/* Header Section */}
             <Box className="flex flex-col md:flex-row md:justify-between md:items-center bg-white shadow-md p-4 rounded-md">
                 <Box className="flex items-center">
                     <CalendarMonthIcon className="text-gray-500" />
                     <Typography className="ml-2 text-lg font-medium">วันที่ {currentDate}</Typography>
                 </Box>
-                <Button variant="contained" color="success" className="flex items-center">
-                    <AddIcon className="text-white" />
-                    <Typography className="text-white ml-2">เพิ่มร้านค้า</Typography>
-                </Button>
             </Box>
 
-            {/* Stats Section */}
-            <Box className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <StatBox title="ยอดขายทั้งหมด" progress="24,780" increase="+14%" />
-                <StatBox title="ยอดเงินที่ได้กลับคืน" progress="17,489" increase="+14%" />
-                <StatBox title="จำนวนสินค้าที่ขายได้" progress="9,962" increase="+29%" />
-                <StatBox title="จำนวนสินค้าคงเหลือ" progress="50" />
+            <Box className="mt-6 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <StatBox title="ยอดขายรูปทั้งหมด" progress="24,780 บาท" />
+                <StatBox title="จำนวนรูปที่ขายได้" progress='500 บาท' /> 
+                <StatBox title="จำนวนผู้ซื้อ" progress='5คน' /> 
             </Box>
 
-            {/* Chart and Category Section */}
-            <Box className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Box className="bg-white p-5 shadow-md rounded-md">
-                    <Box className="flex justify-between items-center mb-4">
-                        <Typography variant="h6" fontWeight="600">จำนวนสินค้าที่ขายดี</Typography>
-                        <FormControl sx={{ bgcolor:'#F4F5F9', borderRadius: 1 }}>
-                            <NativeSelect id="demo-customized-select-native" className="pl-2">
-                                <option aria-label="None" value="" />
-                                <option>สัปดาห์นี้</option>
-                                <option>เดือนนี้</option>
-                                <option>ปีนี้</option>
-                            </NativeSelect>
-                        </FormControl>
+            <Box className="mt-6 bg-white p-4 rounded-md shadow-md">
+                <Typography variant="h6" className="mb-4">รายงานการขายทั้งหมด</Typography>
+                
+                <Box className="flex flex-wrap items-center gap-4 mb-4 p-3">
+                    <Select
+                        label="Start Date"
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                        displayEmpty
+                        variant="outlined"
+                        className="min-w-[150px]"
+                    >
+                        <MenuItem value="" disabled>Start Date</MenuItem>
+                        {/* Sample dates - replace with your own logic to generate dates */}
+                        <MenuItem value="2024-10-01">01/10/2024</MenuItem>
+                        <MenuItem value="2024-10-02">02/10/2024</MenuItem>
+                        <MenuItem value="2024-10-03">03/10/2024</MenuItem>
+                        {/* Add more dates as needed */}
+                    </Select>
+
+                    {/* Select for End Date */}
+                    <Select
+                        label="End Date"
+                        value={endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
+                        displayEmpty
+                        variant="outlined"
+                        className="min-w-[150px]"
+                    >
+                        <MenuItem value="" disabled>End Date</MenuItem>
+                        {/* Sample dates - replace with your own logic to generate dates */}
+                        <MenuItem value="2024-10-01">01/10/2024</MenuItem>
+                        <MenuItem value="2024-10-02">02/10/2024</MenuItem>
+                        <MenuItem value="2024-10-03">03/10/2024</MenuItem>
+                        {/* Add more dates as needed */}
+                    </Select>
+
+                    {/* Align Buttons to the right */}
+                    <Box className="flex text-right ">
+                        <Box className='p-3'>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handlePrintReport}
+                                startIcon={<AddIcon />}
+                                className="mt-4 md:mt-0 mr-2  "
+                            >
+                                Print Report
+                            </Button>
+                        </Box>
+                        
+                        <Box className='p-3'>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={exportToExcel}
+                                className="mt-4 md:mt-0"
+                            >
+                                Export to Excel
+                            </Button>
+                        </Box>
                     </Box>
-                    <LineChart 
-                        labels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
-                        datasets={[{
-                            label: 'ยอดขาย',
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                            fill: false,
-                            borderColor: 'rgb(75, 192, 192)',
-                            tension: 0.1
-                        }]}
-                    />
                 </Box>
 
-                <Box className="bg-white p-5 shadow-md rounded-md">
-                    <Catagory 
-                        title={'หมวดหมู่สินค้า'}
-                        items={[
-                            { icon: <CameraAltOutlinedIcon />, content: 'ภาพถ่าย', increase: '96.42' },
-                            { icon: <NoteAddOutlinedIcon />, content: 'เวกเตอร์', increase: '89.23' },
-                            { icon: <PermMediaOutlinedIcon />, content: 'มัลติมีเดีย', increase: '72.56' },
-                            { icon: <ViewInArOutlinedIcon />, content: '3D Model', increase: '65.78' }
-                        ]}
-                    />
-                </Box>
+                {/* Render the filtered data */}
+                {filteredData.length > 0 ? (
+                    <ul className="p-5 space-y-4">
+                        {filteredData.map(item => (
+                            <li className="p-2 flex justify-between items-center border-b border-gray-200" key={item.id}>
+                                <span>วันที่: {item.date}</span>
+                                <span><img src={item.picture} className="w-10 h-10 object-cover" /></span>
+                                <span>ราคา: {item.amount} บาท</span>
+                                <span>ผู้ซื้อ: {item.buyer}</span>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <Typography>ไม่พบข้อมูล</Typography>
+                )}
             </Box>
         </Box>
     );

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,36 +11,46 @@
             border-collapse: collapse;
             width: 100%;
         }
+
         th, td {
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
         }
+
         th {
             background-color: #f2f2f2;
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto p-5">
-        <h1 class="text-2xl font-bold text-center mb-5">รายงาน Commission</h1>
 
-        <div id="summary" class="bg-white shadow-md rounded p-5 mb-5">
-            <p class="text-lg font-semibold">User Code: <span id="user_code">Loading...</span></p>
-            <p class="text-lg font-semibold">Agent Code: <span id="agent_code">Loading...</span></p>
-            <p class="text-lg font-semibold">ค่า commission: <span id="all_shared">Loading...</span></p>
-            <p class="text-lg font-semibold">ค่า commission ที่เหลืออยู่: <span id="all_shared_pending">Loading...</span></p>
+<body class="bg-gray-50">
+
+    <div class="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-6 border border-gray-200">
+        <h1 class="text-3xl font-bold text-center text-gray-700 mb-6">รายงาน Commission</h1>
+
+        <div id="summary" class="bg-gray-100 shadow-md rounded p-5 mb-5">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-semibold text-gray-600">User Code:</span>
+                <span id="user_code" class="text-lg text-gray-800">Loading...</span>
+            </div>
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-semibold text-gray-600">Agent Code:</span>
+                <span id="agent_code" class="text-lg text-gray-800">Loading...</span>
+            </div>
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-semibold text-gray-600">Commission:</span>
+                <span id="all_shared" class="text-lg text-gray-800">Loading...</span>
+            </div>
         </div>
 
-        <h2 class="text-xl font-semibold mb-3">Data Table</h2>
-        <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-            <thead class="bg-gray-200">
+        <!-- Hidden table for export -->
+        <table id="exportTable" class="hidden">
+            <thead>
                 <tr>
                     <th>User Code</th>
                     <th>Agent Code</th>
-                    <th>Total Shared</th>
-                    <th>Total Shared Pending</th>
-                    <th>Total Shared Reported</th>
+                    <th>Commission</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,14 +58,12 @@
                     <td id="user_code_td">Loading...</td>
                     <td id="agent_code_td">Loading...</td>
                     <td id="all_shared_td">Loading...</td>
-                    <td id="all_shared_pending_td">Loading...</td>
-                    <td id="all_shared_reported_td">Loading...</td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="mt-5 text-center">
-            <button class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600" onclick="exportToExcel()">
+        <div class="text-center mt-8">
+            <button id="exportBtn" class="bg-green-500 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-400 disabled:cursor-not-allowed" disabled onclick="exportToExcel()">
                 Export to Excel
             </button>
         </div>
@@ -82,28 +91,29 @@
 
                 const data = await response.json();
                 populateData(data);
+
+                // Enable export button after data is successfully loaded
+                document.getElementById('exportBtn').disabled = false;
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         }
 
         function populateData(data) {
+            // Populate the visible summary data
             document.getElementById("user_code").textContent = data.user_code;
             document.getElementById("agent_code").textContent = data.agent_code;
             document.getElementById("all_shared").textContent = data.all_shared;
-            document.getElementById("all_shared_pending").textContent = data.all_shared_pending;
-            document.getElementById("all_shared_reported").textContent = data.all_shared_reported;
 
-            // Populate table cells
+            // Populate the hidden table for export
             document.getElementById("user_code_td").textContent = data.user_code;
             document.getElementById("agent_code_td").textContent = data.agent_code;
             document.getElementById("all_shared_td").textContent = data.all_shared;
-            document.getElementById("all_shared_pending_td").textContent = data.all_shared_pending;
-            document.getElementById("all_shared_reported_td").textContent = data.all_shared_reported;
         }
 
         function exportToExcel() {
-            const table = document.querySelector("table");
+            const table = document.querySelector("#exportTable");
             let rows = Array.from(table.rows);
             let csvContent = rows.map(row => Array.from(row.cells).map(cell => cell.textContent).join(",")).join("\n");
 
@@ -111,7 +121,7 @@
             const url = URL.createObjectURL(blob);
             const link = document.createElement("a");
             link.setAttribute("href", url);
-            link.setAttribute("download", "report.csv");
+            link.setAttribute("download", "commission_report.csv");
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -119,5 +129,7 @@
 
         window.onload = fetchData;
     </script>
+
 </body>
+
 </html>

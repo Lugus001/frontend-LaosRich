@@ -1,28 +1,27 @@
 import {
   createBrowserRouter,
-  RouterProvider,
   Navigate,
+  RouterProvider,
 } from "react-router-dom";
 import RequireAuth from "./components/etc/RequireAuth";
+import AuthLayout from "./layouts/AuthLayout";
 import MainLayout from "./layouts/MainLayout";
+import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/Dashboard";
 import Member from "./pages/Member";
 import Messages from "./pages/Messages";
 import NotFound from "./pages/NotFound";
-import Order from "./pages/Order";
+import Settings from "./pages/Settings";
 import Shop from "./pages/Shop";
 import Test from "./pages/Test";
-import Settings from "./pages/Settings";
-import AuthLayout from "./layouts/AuthLayout";
-import Login from "./pages/Auth/Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      //<RequireAuth>
+      <RequireAuth>
       <MainLayout />
-      //</RequireAuth>
+      </RequireAuth>
     ),
     children: [
       {
@@ -33,10 +32,7 @@ const router = createBrowserRouter([
         path: "/shop",
         element: <Shop />,
       },
-      {
-        path: "/order",
-        element: <Order />,
-      },
+      
       {
         path: "/member",
         element: <Member />,

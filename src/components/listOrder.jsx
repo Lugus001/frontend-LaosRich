@@ -25,14 +25,14 @@ const ListOrder = ({Product, price, quantity, total, moneyBack, commission, rece
 
         {/* Table Rows (example data) */}
         <Box className="flex justify-between py-2 ">
-          <Typography >{Product}</Typography>
-          <Typography >{user}</Typography>
-          <Typography >{price}</Typography>
-          <Typography >{quantity}</Typography>
-          <Typography >{total}</Typography>
-          <Typography >{moneyBack}</Typography>
-          <Typography >{commission}</Typography>
-          <Typography>{received}</Typography>
+          <Typography  variant="h6">{Product}</Typography>
+          <Typography variant="h6">{user}</Typography>
+          <Typography variant="h6">{price}</Typography>
+          <Typography variant="h6">{quantity}</Typography>
+          <Typography className="text-green-500 " variant="h6">{total}</Typography>
+          <Typography  className="text-blue-500 " variant="h6">{moneyBack}</Typography>
+          <Typography className="text-yellow-500 " variant="h6">{commission}</Typography>
+          <Typography className="text-purple-500 " variant="h6">{received}</Typography>
         </Box>
 
         

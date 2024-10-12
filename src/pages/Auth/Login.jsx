@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import logo from '../../assets/logo/logo.svg';
 import lineLogo from '../../assets/icon/line.svg';
 import GoogleLogo from '../../assets/icon/google.svg';
 import phone from '../../assets/icon/phone.svg';
-
+import loaluy from '../../assets/logo/loaluay.png';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -62,16 +61,15 @@ const Login = () => {
       </div>
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-700">
         <div className="flex flex-col items-center ">
-          <img src={logo} alt="Icon" className="w-full" />
+          <img src={loaluy} alt="Icon" className="w-[20%]" />
         </div>
         <div className="bg-gray-700 p-8 w-full max-w-md">
-          <h2 className="text-2xl font-bold mb-6 text-center text-white font-kanit">ลงชื่อเข้าใช้</h2>
-          <h1 className="text-sm font-bold mb-6 text-center text-gray-400 font-kanit">เข้าสู่ระบบหรือสมัครสมาชิก</h1>
+          <h2 className="text-2xl font-bold mb-6 text-center text-white font-kanit">ลงชื่อเข้าใช้ Admin</h2>
 
           <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label htmlFor="username" className="block text-sm font-medium text-white font-kanit">
-                ที่อยู่อีเมลหรือผู้ใช้งาน
+                ที่อยู่อีเมลหรือ User Name
               </label>
               <input
                 type="text"

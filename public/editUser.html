@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User Information</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <div class="w-full mx-auto bg-white rounded-lg shadow-md my-5 p-4">
+        <div class="bg-gradient-to-r from-purple-300 to-yellow-300 rounded-t-lg p-5 text-center">
+            <div class="flex justify-end mb-4">
+                <button onclick="enableEdit()" class="w-full sm:w-auto text-black py-2 rounded-md font-semibold bg-gray-100 border border-gray-200 hover:bg-blue-200 px-6">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> แก้ไขข้อมูล
+                </button>
+            </div>
+
+            <div class="text-center">
+                <div id="placeholder" class="rounded-full bg-gray-300 w-24 h-24 mb-4 mx-auto flex items-center justify-center">
+                    <span class="text-gray-500">ไม่มีรูปภาพ</span>
+                </div>
+                <img id="profileImage" src="" alt="Profile" class="rounded-full w-24 h-24 mb-4 mx-auto" style="display:none;">
+
+                <label for="imageUpload" class="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+                    อัพโหลดรูปภาพ
+                </label>
+                <input type="file" id="imageUpload" class="hidden" accept="image/*" onchange="displayImage(event)">
+            </div>
+        </div>
+
+        <form class="bg-white rounded-b-lg p-5" id="editForm" onsubmit="submitForm(event)">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- First Name -->
+                <div>
+                    <label for="first_name" class="text-gray-400 text-sm">First Name</label>
+                    <input id="first_name" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="นายอมร" disabled>
+                </div>
+
+                <!-- Last Name -->
+                <div>
+                    <label for="last_name" class="text-gray-400 text-sm">Last Name</label>
+                    <input id="last_name" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="วงคำเหลา" disabled>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- Email -->
+                <div>
+                    <label for="email" class="text-gray-400 text-sm">Email</label>
+                    <input id="email" type="email" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="test01@test.com" disabled>
+                </div>
+
+                <!-- Phone -->
+                <div>
+                    <label for="phone" class="text-gray-400 text-sm">Phone</label>
+                    <input id="phone" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="+66 0855555555" disabled>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- Region -->
+                <div>
+                    <label for="region" class="text-gray-400 text-sm">Region</label>
+                    <input id="region" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="th" disabled>
+                </div>
+
+                <!-- Agent Code -->
+                <div>
+                    <label for="agent_code" class="text-gray-400 text-sm">Agent Code</label>
+                    <input id="agent_code" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="TOSSAGUN" disabled>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end">
+                <button type="submit" class="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Function to enable editing
+        function enableEdit() {
+            const formElements = document.getElementById("editForm").elements;
+            for (let i = 0; i < formElements.length; i++) {
+                formElements[i].disabled = false;
+            }
+        }
+
+        // Function to display the uploaded image
+        function displayImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const profileImage = document.getElementById('profileImage');
+                const placeholder = document.getElementById('placeholder');
+
+                profileImage.src = e.target.result; 
+                profileImage.style.display = 'block'; 
+                placeholder.style.display = 'none'; 
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); 
+            }
+        }
+
+        async function submitForm(event) {
+            event.preventDefault();
+
+            const userData = {
+                first_name: document.getElementById('first_name').value,
+                last_name: document.getElementById('last_name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                region: document.getElementById('region').value,
+                agent_code: document.getElementById('agent_code').value
+            };
+
+            try {
+                const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/me', {
+                    method: 'PUT', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData) 
+                });
+
+                if (response.ok) {
+                    alert('User information updated successfully.');
+                    const result = await response.json();
+                    console.log(result);
+                } else {
+                    alert('Failed to update user information.');
+                    console.log('Error:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while updating user information.');
+            }
+        }
+    </script>
+
+</body>
+</html>

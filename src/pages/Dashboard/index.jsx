@@ -1,31 +1,33 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import "../../../src/index.css";
-import Header from "../../components/Header";
 import StatBox from "../../components/StatBox";
 import StatusOrder from "../../components/StatusOrder";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import RealtimeBox from "../../components/RealtimeBox";
+import Loaluay from '../../assets/logo/loaluay.png';
 
 const Index = () => {
-  const currentDate = new Date().toLocaleDateString("th-TH", {
-    day: "numeric",
-    year: "numeric",
-    month: "long",
-  });
+ 
 
   return (
     <Box className="bg-gray-100 min-h-screen p-4 md:p-5">
-      {/* Header Section */}
-      <Box className="flex flex-col md:flex-row md:justify-between md:items-center bg-white shadow-md p-4 rounded-md mb-4">
-        <Box className="flex items-center">
-          <CalendarMonthIcon className="text-gray-500" />
-          <Typography className="ml-2 text-lg font-medium">
-            วันที่ {currentDate}
-          </Typography>
-        </Box>
-      </Box>
+      <Box className="flex flex-col md:flex-col md:justify-between md:items-center  p-4  mb-4">
+        
+        <Box className='w-full p-3'>
+        <RealtimeBox
+          title="ยอดขายรูปของวันนี้"
+          num = "1"
+          picture={Loaluay}
+          subtitle='NFT coin'
+          total='1'
+          prize='100'
+        />
 
-      {/* Title Section */}
+        </Box>
+        
+      </Box>
+     
+     
       <Box
         display="flex"
         justifyContent="space-between"
@@ -33,29 +35,22 @@ const Index = () => {
         mb={2}
       ></Box>
 
-      {/* StatBox Section */}
-      <Box className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  <Box className="mt-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
+        
         <StatBox
-          title="ยอดขายรวมของวันนี้"
-          subtitle="ยอดที่ได้"
-          progress="24.780"
-          increase="+14%"
-        />
-
-        <StatBox
-          title="ยอดขายรวมของเดือนนี้"
+          title="ยอดขายรูป ของเดือนนี้"
           subtitle="ยอดที่ได้"
           progress="17.489"
           increase="+14%"
         />
         <StatBox
-          title="ยอดขายสะสมรวมทั้งปี"
+          title="ยอดขายรูป สะสมรวมทั้งปี"
           subtitle="ยอดที่ได้"
           progress="9.962"
           increase="+29%"
         />
         <StatBox
-          title="ยอดขายทั้งหมด"
+          title="ยอดขายรูปทั้งหมด"
           subtitle="รวม"
           progress="50.000"
           increase="+5%"
@@ -65,13 +60,10 @@ const Index = () => {
       {/* StatusOrder Section */}
       <Box className="pt-5">
         <StatusOrder
-          Product="Laos Pictures"
+          user='User1'
+          Product="NFT coin"
           price="150 บาท"
           quantity="1"
-          total="150 บาท"
-          moneyBack="10 บาท"
-          commission="10 บาท"
-          received="10 บาท"
         />
       </Box>
     </Box>
