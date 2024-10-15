@@ -62,57 +62,74 @@ const Index = () => {
       </Box>
       <Box className="p-5">
         <Box className="pt-5 pl-5">
-          <Typography variant="h5" fontWeight="bold">
+          <Typography variant="h4" fontWeight="bold">
             สมาชิก
           </Typography>
           <Box className="border border-gray-200"></Box>
         </Box>
         <Box className="pt-5">
           {isEditing ? (
-            <form onSubmit={handleSubmit} className="bg-white rounded-lg p-5">
-              <TextField
+            <form onSubmit={handleSubmit} className="bg-white rounded-lg p-3">
+              <Box className='p-3'>
+                <TextField
                 label="First Name"
                 name="name"
                 value={memberInfo.name}
                 onChange={handleChange}
                 fullWidth
-                className="mb-4"
+                className="mb-2"
               />
-              <TextField
-                label="Last Name"
-                name="lastName"
-                value={memberInfo.lastName}
-                onChange={handleChange}
-                fullWidth
-                className="mb-4"
-              />
-              <TextField
-                label="Phone"
-                name="tel"
-                value={memberInfo.tel}
-                onChange={handleChange}
-                fullWidth
-                className="mb-4"
-              />
-              <TextField
-                label="Email"
-                name="email"
-                value={memberInfo.email}
-                onChange={handleChange}
-                fullWidth
-                className="mb-4"
-              />
-              <TextField
-                label="Region"
-                name="region"
-                value={memberInfo.region}
-                onChange={handleChange}
-                fullWidth
-                className="mb-4"
-              />
-              <Button type="submit" variant="contained" color="primary">
-                Save Changes
-              </Button>
+              </Box>
+              
+              <Box className='p-3'>
+                <TextField
+                  label="Last Name"
+                  name="lastName"
+                  value={memberInfo.lastName}
+                  onChange={handleChange}
+                  fullWidth
+                  className="mb-4"
+                />
+              </Box>
+
+              <Box className='p-3'>
+                <TextField
+                  label="Phone"
+                  name="tel"
+                  value={memberInfo.tel}
+                  onChange={handleChange}
+                  fullWidth
+                  className="mb-4"
+                />
+              </Box>
+              
+              <Box className='p-3'>
+                <TextField
+                  label="Email"
+                  name="email"
+                  value={memberInfo.email}
+                  onChange={handleChange}
+                  fullWidth
+                  className="mb-4"
+                />
+              </Box>
+
+              <Box className='p-3'>
+                <TextField
+                  label="Region"
+                  name="region"
+                  value={memberInfo.region}
+                  onChange={handleChange}
+                  fullWidth
+                  className="mb-4"
+                />
+              </Box>
+
+              <Box className='p-3'>
+                <Button type="submit" variant="contained" color="primary">
+                  Save Changes
+                </Button>
+              </Box>
             </form>
           ) : (
             <MemberList

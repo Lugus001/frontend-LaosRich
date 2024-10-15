@@ -1,6 +1,7 @@
 import { Box, Typography, Grid } from "@mui/material";
 import React from 'react';
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import '../../src/index.css';
 
 const RealtimeBox = ({ title, subtitle, picture, num, total, prize }) => {
@@ -22,36 +23,37 @@ const RealtimeBox = ({ title, subtitle, picture, num, total, prize }) => {
             
             {/* Title Section */}
             <Box display="flex" alignItems="center" mb={2}>
-                <Box textAlign="center" flexGrow={1}>
-                    <Typography variant="h5" className='text-center'>
+                <Box textAlign="center" flexGrow={1} >
+                    <Typography variant="h5"   fontWeight="bold" className='text-left pl-3 pb-3 font-kanit'>
+                    <MonetizationOnOutlinedIcon className="pr-3" sx={{ color: '#FFD700', fontSize: '4rem' }} />
                         {title}
                     </Typography>
                 </Box>
             </Box>
 
             {/* Table Header */}
-            <Box className="font-semibold mb-2 border-b border-gray-300 pb-2">
-                <Grid container spacing={2}>
+            <Box className="font-semibold mb-2  pb-2 bg-gray-200 p-5">
+                <Grid container spacing={2} >
                     <Grid item xs={1}>
-                        <Typography className="text-gray-500">No.</Typography>
+                        <Typography className="text-gray-600 pl-[0.5rem] "></Typography>
                     </Grid>
                     <Grid item xs={2} className="text-center">
-                        <Typography className="text-gray-500">รูป</Typography>
+                        <Typography className="text-black " variant="h5">รูป</Typography>
                     </Grid>
                     <Grid item xs={5} className="text-center">
-                        <Typography className="text-gray-500">ชื่อรูป</Typography>
+                        <Typography className="text-black " variant="h5">ชื่อรูป</Typography>
                     </Grid>
                     <Grid item xs={2} className="text-center">
-                        <Typography className="text-gray-500">จำนวน</Typography>
+                        <Typography className="text-black " variant="h5">จำนวน</Typography>
                     </Grid>
                     <Grid item xs={2} className="text-center">
-                        <Typography className="text-gray-500">ราคา</Typography>
+                        <Typography className="text-black " variant="h5">ราคา</Typography>
                     </Grid>
                 </Grid>
             </Box>
 
             {/* Table Row */}
-            <Box className="flex items-center py-3">
+            <Box className="flex items-center justify-between  border-b border-gray-200 p-5">
                 <Grid container spacing={2}>
                     <Grid item xs={1} className="flex justify-center">
                         <Typography variant="h6" className="font-extrabold">

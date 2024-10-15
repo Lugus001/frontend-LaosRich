@@ -31,7 +31,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
-  <body>
+  
     <div
       class="min-h-screen flex flex-col items-center justify-center p-5 bg-[#116860]"
     >
@@ -143,7 +143,20 @@
               />
               <p id="password-alert" class="text-red-600 mt-1 hidden">รหัสผ่านของคุณใช้อย่างน้อย 8 ตัวอักษร</p>
             </div>
+
+            <div class="flex flex-col">
+              <label for="invitation_code" class="block text-md font-medium text-white">รหัสเชิญ (Optional)</label>
+              <input
+                  type="text"
+                  id="agent_code"
+                  name="agent_code"
+                  class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  readOnly  
+              />
           </div>
+          </div>
+
+          
 
           <div class="flex items-center mb-4">
             <div class="flex items-center">
@@ -291,6 +304,9 @@
         const agentCode = data.agent_code; 
         console.log(`Agent Code: ${agentCode}`);
 
+        document.getElementById('agent_code').value = agentCode;
+
+
         const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?agent_code=${agentCode}`;
         window.history.pushState({ path: newUrl }, '', newUrl);
 
@@ -302,6 +318,8 @@
     fetchOrderData();
 
     </script>
+    
+
     <script>
       const phonePrefix = document.getElementById('phone_prefix');
       const dropdown = document.getElementById('dropdown-options');

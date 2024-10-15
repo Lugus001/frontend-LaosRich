@@ -1,11 +1,13 @@
-import { Box, Button, Select, MenuItem, Typography } from "@mui/material";
+import { Box, Button, Select, MenuItem, Typography, Grid } from "@mui/material";
 import React, { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add'; 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import * as XLSX from 'xlsx'; // Import the xlsx library
+import * as XLSX from 'xlsx'; 
 import '../../../src/index.css';
-import StatBox from "../../components/StatBox";
-
+import BuyBox from "../../components/BuyBox";
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
 const Index = () => {
     const currentDate = new Date().toLocaleDateString('th-TH', {
         day: 'numeric', 
@@ -35,7 +37,6 @@ const Index = () => {
         console.log(filteredData);
     };
 
-    // Function to export data to Excel
     const exportToExcel = () => {
         const ws = XLSX.utils.json_to_sheet(filteredData.map(({ id, date, amount, buyer }) => ({
             ID: id,
@@ -47,7 +48,6 @@ const Index = () => {
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "Sales Data");
 
-        // Generate the Excel file and trigger download
         XLSX.writeFile(wb, `Sales_Report_${new Date().toISOString().slice(0, 10)}.xlsx`);
     };
 
@@ -61,14 +61,27 @@ const Index = () => {
             </Box>
 
             <Box className="mt-6 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <StatBox title="ยอดขายรูปทั้งหมด" progress="24,780 บาท" />
-                <StatBox title="จำนวนรูปที่ขายได้" progress='500 บาท' /> 
-                <StatBox title="จำนวนผู้ซื้อ" progress='5คน' /> 
+                <BuyBox
+                    icon={<CalendarMonthOutlinedIcon className="pr-3" sx={{ color: '#2ecc71', fontSize: '3rem' }} />}
+                    title="ยอดขายรูปทั้งหมด" 
+                    progress="24,780 บาท" />
+
+                <BuyBox 
+                    icon={<CalendarTodayOutlinedIcon className="pr-3" sx={{ color: '#f39c12', fontSize: '3rem' }}/>}
+                    title="จำนวนรูปที่ขายได้" 
+                    progress='500 บาท' /> 
+
+                <BuyBox 
+                    icon={<LocalGroceryStoreOutlinedIcon className="pr-3" sx={{ color: '#9b59b6', fontSize: '3rem' }}/>}
+                    title="จำนวนผู้ซื้อ" 
+                    progress='5คน' /> 
+
             </Box>
 
             <Box className="mt-6 bg-white p-4 rounded-md shadow-md">
-                <Typography variant="h6" className="mb-4">รายงานการขายทั้งหมด</Typography>
+                <Typography variant="h5" fontWeight="bold"  className="mb-4 p-3">รายงานการขายทั้งหมด</Typography>
                 
+            
                 <Box className="flex flex-wrap items-center gap-4 mb-4 p-3">
                     <Select
                         label="Start Date"
@@ -79,14 +92,11 @@ const Index = () => {
                         className="min-w-[150px]"
                     >
                         <MenuItem value="" disabled>Start Date</MenuItem>
-                        {/* Sample dates - replace with your own logic to generate dates */}
                         <MenuItem value="2024-10-01">01/10/2024</MenuItem>
                         <MenuItem value="2024-10-02">02/10/2024</MenuItem>
                         <MenuItem value="2024-10-03">03/10/2024</MenuItem>
-                        {/* Add more dates as needed */}
                     </Select>
 
-                    {/* Select for End Date */}
                     <Select
                         label="End Date"
                         value={endDate}
@@ -96,14 +106,11 @@ const Index = () => {
                         className="min-w-[150px]"
                     >
                         <MenuItem value="" disabled>End Date</MenuItem>
-                        {/* Sample dates - replace with your own logic to generate dates */}
                         <MenuItem value="2024-10-01">01/10/2024</MenuItem>
                         <MenuItem value="2024-10-02">02/10/2024</MenuItem>
                         <MenuItem value="2024-10-03">03/10/2024</MenuItem>
-                        {/* Add more dates as needed */}
                     </Select>
 
-                    {/* Align Buttons to the right */}
                     <Box className="flex text-right ">
                         <Box className='p-3'>
                             <Button
@@ -128,17 +135,38 @@ const Index = () => {
                             </Button>
                         </Box>
                     </Box>
+
+                    
                 </Box>
 
-                {/* Render the filtered data */}
+                <Box className="font-semibold mb-2  pb-2 bg-gray-200 ">
+                <Grid container spacing={2} >
+                    <Grid item xs={1}>
+                        <Typography className="text-gray-600 pl-[0.5rem] "></Typography>
+                    </Grid>
+                    <Grid item xs={2} className="text-left ">
+                        <Typography className="text-black " variant='h6' >วันที่</Typography>
+                    </Grid>
+                    <Grid item xs={5} className="text-center pr-[25%]">
+                        <Typography className="text-black " variant='h6' >รูป</Typography>
+                    </Grid>
+                    <Grid item xs={2} className="text-left">
+                        <Typography className="text-black " variant='h6' >จำนวน</Typography>
+                    </Grid>
+                    <Grid item xs={2} className="text-right pr-[2%]">
+                        <Typography className="text-black " variant='h6' >ราคา</Typography>
+                    </Grid>
+                </Grid>
+            </Box>
+
                 {filteredData.length > 0 ? (
                     <ul className="p-5 space-y-4">
                         {filteredData.map(item => (
                             <li className="p-2 flex justify-between items-center border-b border-gray-200" key={item.id}>
-                                <span>วันที่: {item.date}</span>
+                                <span className="font-semibold">วันที่: {item.date}</span>
                                 <span><img src={item.picture} className="w-10 h-10 object-cover" /></span>
-                                <span>ราคา: {item.amount} บาท</span>
-                                <span>ผู้ซื้อ: {item.buyer}</span>
+                                <span className="pl-[10%] font-semibold">ราคา: {item.amount} บาท</span>
+                                <span className="font-semibold">ผู้ซื้อ: {item.buyer}</span>
                             </li>
                         ))}
                     </ul>
