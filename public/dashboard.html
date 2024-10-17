@@ -72,28 +72,28 @@
                     </div>
                 </div>
             </div>
-            <div class="fixed bottom-0 left-0 w-full  bg-black text-white py-3 px-5 flex flex-col space-y-2 z-10 ">
+            <div id="cookieDialog" class="fixed bottom-0 left-0 w-full  bg-black text-white py-3 px-5 flex flex-col space-y-1 z-10 ">
                 <div class="flex justify-between items-center  ">
-                    <p class="text-sm">เว็บไซต์นี้ใช้คุกกี้</p>
+                    <p class="text-xs">เว็บไซต์นี้ใช้คุกกี้</p>
                 </div>
-                <div class="flex justify-between  space-y-1 text-sm">
+                <div class="flex justify-between  space-y-1 text-xs">
                     <p>เว็บไซต์นี้มีการใช้งานคุกกี้เพื่อให้ผู้ใช้งานสามารถใช้บริการได้อย่างต่อเนื่องและอำนวยความสะดวกในการใช้งานเว็บไซต์ รวมถึงช่วยให้เราปรับปรุงการนำเสนอเนื้อหาตรงตามความต้องการของผู้ใช้งาน โดยสามารถศึกษารายละเอียดเพิ่มเติมได้ใน</p>
                 </div>
                     
-                    <div class="flex items-end text-sm space-x-1 ">
+                    <div class="flex items-end text-xs space-x-1 ">
                         <div class="flex  text-sm space-x-2 mr-auto">
-                            <p><a href="/privacy-policy.html" class="underline">นโยบายความเป็นส่วนตัว</a></p>
-                            <p><a href="/cookie-policy.html" class="underline">นโยบายคุกกี้</a></p>
-                            <p><a href="/terms.html" class="underline">ข้อกำหนด</a></p>
+                            <p><a href="/privacy-policy.html" class="underline text-xs">นโยบายความเป็นส่วนตัว</a></p>
+                            <p><a href="/cookie-policy.html" class="underline text-xs">นโยบายคุกกี้</a></p>
+                            <p><a href="/terms.html" class="underline text-xs">ข้อกำหนด</a></p>
                         </div>
-                        <div class="flex  text-sm space-x-2 ml-auto">
-                            <button onclick="acceptCookies()" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">ยอมรับทั้งหมด</button>
-                            <button onclick="openModal()" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">การตั้งค่าคุกกี้</button>
+                        <div class="flex  text-sm space-x-1 ml-auto">
+                            <button onclick="acceptCookies(true)" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 text-xs">ยอมรับทั้งหมด</button>
+                            <button onclick="openModal()" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 text-xs">การตั้งค่าคุกกี้</button>
                      </div>
                         </div>
             </div>
-            <div id="cookieConsentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center w-full z-50">
-                <div class="bg-white rounded-lg shadow-lg p-5 w-11/12 md:w-1/3">
+            <div id="cookieConsentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 " style="display: none;">
+                <div class="bg-white rounded-lg shadow-lg p-5 w-11/12 md:w-1/3 max-w-full">
                     <h2 class="text-lg font-bold mb-4">การตั้งค่าคุกกี้</h2>
                     <p class="text-xs mb-4">ผู้ใช้งานสามารถเลือกการตั้งค่าคุกกี้โดย เปิด/ปิด คุกกี้ในแต่ละประเภทได้ตามความต้องการ ยกเว้นคุกกี้ที่มีความจำเป็น:</p>
                     <div class="flex flex-col space-y-2">
@@ -203,7 +203,7 @@
             <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full p-2 z-0  ">
                 <div class="stat-box relative rounded-lg shadow-lg text-center w-full border border-gray-300 transition-transform transform hover:scale-105 ">
                    <img src="fade.png" alt="laoruayPage" class="w-full rounded-lg "> 
-                    <a href="/policy.html" target="_blank" rel="noopener noreferrer" class="absolute inset-0 flex flex-col items-center justify-center pl-5 pr-5">
+                    <a href="https://laoruay.com/" target="_blank" rel="noopener noreferrer" class="absolute inset-0 flex flex-col items-center justify-center pl-5 pr-5">
                         <div class="p-5 bg-gradient-to-r from-purple-300 to-yellow-300 border border-gray-400 rounded-lg w-full"> 
                             <h2 class="text-black text-2xl rounded-2xl pt-6 ">เข้าสู่ Lao Ruay</h2>
                              <button type="submit" class="w-[60%] py-2 rounded-md font-bold text-red-600 text-2xl">
@@ -390,7 +390,7 @@ fetchUserData();
    function openModal() {
         const modal = document.getElementById('cookieConsentModal');
         if (modal) {
-            modal.style.display = 'block'; 
+            modal.style.display = 'flex'; 
         }
 }
 
@@ -421,19 +421,33 @@ fetchUserData();
             }
             document.cookie = name + "=" + (value || "") + expires + "; path=/"; 
         }
-    function acceptCookies() {
-        const necessaryCookies = true; 
-        const performanceCookies = document.getElementById('performanceCookie').checked;
-        const functionCookies = document.getElementById('functionCookie').checked;
-        const targetingCookies = document.getElementById('targetingCookie').checked;
+        function acceptCookies(acceptAll = false) {
+            const necessaryCookies = true; 
 
-        setCookie('necessaryCookies', necessaryCookies, 365); 
-        setCookie('performanceCookies', performanceCookies, 365); 
-        setCookie('functionCookies', functionCookies, 365); 
-        setCookie('targetingCookies', targetingCookies, 365);
+            const performanceCookies = acceptAll ? true : document.getElementById('performanceCookie') ? document.getElementById('performanceCookie').checked : true;
+            const functionCookies = acceptAll ? true : document.getElementById('functionCookie') ? document.getElementById('functionCookie').checked : true;
+            const targetingCookies = acceptAll ? true : document.getElementById('targetingCookie') ? document.getElementById('targetingCookie').checked : true;
 
-        closeModal();
-    }
+            console.log({
+                necessaryCookies,
+                performanceCookies,
+                functionCookies,
+                targetingCookies
+            });
+
+            setCookie('necessaryCookies', necessaryCookies, 365);
+            setCookie('performanceCookies', performanceCookies, 365);
+            setCookie('functionCookies', functionCookies, 365);
+            setCookie('targetingCookies', targetingCookies, 365);
+
+            closeCookieDialog();
+}
+
+            function closeCookieDialog() {
+                const cookieDialog = document.getElementById('cookieDialog'); 
+                cookieDialog.style.display = 'none'; 
+            }
+    
 
     const setCookiePreference = (checkbox) => {
         const cookiePreference = { analyticsCookieEnabled: checkbox.checked };
