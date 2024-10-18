@@ -62,7 +62,9 @@
               <div class="relative mt-1">
                   <div class="border border-gray-300 rounded-md flex bg-white">
                       <div class="flex items-center p-2  cursor-pointer" id="phone_prefix">
-                          <img src="th.svg" class="w-4 h-4 mr-1" />
+                          <div class="w-4 h-4 mr-1" /><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                          </svg></div>
                       </div>
                       <input
                           type="tel"
@@ -180,13 +182,14 @@
         </form>
 
         <div class="flex items-center justify-center my-8">
-          <div class="border-t border-gray-400 flex-grow mr-2"></div>
-          <span class="text-center text-md font-medium text-white font-kanit">หรือสมัครสมาชิกด้วย</span>
-          <div class="border-t border-gray-400 flex-grow ml-2"></div>
+          <h1 class="text-white text-md pr-1">มีบัญชีแล้ว?</h1>
+          <a href="../login.html" class="text-[#FFFB00] text-md">ลงชื่อเข้าใช้</a>
         </div>
 
+       <!--
         <div class="flex justify-center pt-2">
           <button
+            id="googleLoginButton"
             type="button"
             class="w-full text-gray-500 py-3 rounded-md bg-white border border-gray-400 text-sm hover:bg-gray-300 flex items-center justify-center"
           >
@@ -196,7 +199,9 @@
             ลงชื่อเข้าใช้งานด้วย Google
           </button>
         </div>
+        -->
 
+        <!--
         <div class="flex justify-center pt-2">
           <button
             type="button"
@@ -208,6 +213,7 @@
             ลงชื่อเข้าใช้งานด้วย Line
           </button>
         </div>
+        -->
       </div>
     </div>
     <script>
@@ -235,6 +241,8 @@
   const region = document.getElementById("region").value;
   const password = document.getElementById("password").value;
   const username = document.getElementById("username").value;
+
+  console.log({ username, password, phone_prefix, phone, email, first_name, last_name, region });
 
   if (!username || !password || !phone || !phone_prefix || !region) {
     Swal.fire('Missing Fields', 'Please fill in all required fields.', 'error');
@@ -343,5 +351,6 @@
           }
       });
   </script>
+  
   </body>
 </html>

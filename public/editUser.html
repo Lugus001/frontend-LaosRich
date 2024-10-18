@@ -33,14 +33,14 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <!-- First Name -->
                 <div>
-                    <label for="first_name" class="text-gray-400 text-sm">First Name</label>
-                    <input id="first_name" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="นายอมร" disabled>
+                    <label for="first_name" class="text-gray-400 text-sm">ชื่อจริง</label>
+                    <input id="first_name" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" disabled>
                 </div>
 
                 <!-- Last Name -->
                 <div>
-                    <label for="last_name" class="text-gray-400 text-sm">Last Name</label>
-                    <input id="last_name" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="วงคำเหลา" disabled>
+                    <label for="last_name" class="text-gray-400 text-sm">นามสกุล</label>
+                    <input id="last_name" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" disabled>
                 </div>
             </div>
 
@@ -48,32 +48,30 @@
                 <!-- Email -->
                 <div>
                     <label for="email" class="text-gray-400 text-sm">Email</label>
-                    <input id="email" type="email" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="test01@test.com" disabled>
+                    <input id="email" type="email" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" disabled>
                 </div>
 
                 <!-- Phone -->
                 <div>
-                    <label for="phone" class="text-gray-400 text-sm">Phone</label>
-                    <input id="phone" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="+66 0855555555" disabled>
+                    <label for="phone" class="text-gray-400 text-sm">เบอร์โทรศัพท์</label>
+                    <input id="phone" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" disabled>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <!-- Region -->
                 <div>
-                    <label for="region" class="text-gray-400 text-sm">Region</label>
-                    <input id="region" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="th" disabled>
+                    <label for="region" class="text-gray-400 text-sm">สัญชาติ</label>
+                    <input id="region" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" disabled>
                 </div>
 
                 <!-- Agent Code -->
                 <div>
                     <label for="agent_code" class="text-gray-400 text-sm">Agent Code</label>
-                    <input id="agent_code" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" value="TOSSAGUN" disabled>
+                    <input id="agent_code" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" >
                 </div>
             </div>
-            
 
-            
             <!-- Submit Button -->
             <div class="flex justify-end">
                 <button type="submit" class="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600">
@@ -112,9 +110,49 @@
             }
         }
 
+        // Fetch user data and populate form
+        async function fetchUserData() {
+            try {
+                const token = localStorage.getItem('token'); 
+                if (!token) {
+                    throw new Error('No token found');
+                }
+
+                const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/me', {
+                    method: 'GET', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` 
+                    },
+                });
+
+                const data = await response.json(); 
+
+                if (response.ok) {
+                    const { first_name, last_name, email, phone, region, agent_code } = data.user; 
+
+                    // Set values to form inputs
+                    document.getElementById('first_name').value = first_name || 'First name not available';
+                    document.getElementById('last_name').value = last_name || 'Last name not available';
+                    document.getElementById('email').value = email || 'Email not available';
+                    document.getElementById('phone').value = phone || 'Phone not available';
+                    document.getElementById('region').value = region || 'Region not available';
+                    document.getElementById('agent_code').value = agent_code || 'Agent code not available';
+
+                    console.log('Response data:', { first_name, last_name , email, phone, region, agent_code });
+                } else {
+                    throw new Error(data.message || 'Error fetching user data');
+                }
+
+            } catch (error) {
+                console.error("Error fetching User data:", error);
+                document.getElementById('error-message').innerText = error.message;
+            }
+        }
+
+        // Submit form data
         async function submitForm(event) {
             event.preventDefault();
-
             const userData = {
                 first_name: document.getElementById('first_name').value,
                 last_name: document.getElementById('last_name').value,
@@ -124,11 +162,14 @@
                 agent_code: document.getElementById('agent_code').value
             };
 
+            const token = localStorage.getItem('token'); 
+
             try {
                 const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/me', {
                     method: 'PUT', 
                     headers: {
                         'Content-Type': 'application/json',
+                         'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify(userData) 
                 });
@@ -146,6 +187,9 @@
                 alert('An error occurred while updating user information.');
             }
         }
+
+        // Fetch user data when page loads
+        window.onload = fetchUserData;
     </script>
 
 </body>
