@@ -181,29 +181,76 @@
                     </div>
                 </div>
             </div>
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full p-3 ">
+
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex flex-col md:inline-flex items-center justify-center w-full p-4">
                 <div class="stat-box rounded-lg shadow-lg p-5 text-center w-full border border-gray-300 transition-transform transform hover:scale-105">
-                    <div class="flex items-center pb-2 space-x-2"> 
+                    <div class="flex items-center pb-2 space-x-2">
                         <i class="fa fa-money" aria-hidden="true"></i>
                         <h2 class="text-black text-2xl rounded-2xl">ค่า commission</h2>
                     </div>
                     <div class="flex items-center space-x-3 pl-4">
                         <p class="text-black text-xl">ยอดที่ได้</p>
-                        <p class="text-2xl text-red-500" id="allSharedAmount"></p>                       
+                        <p class="text-2xl text-red-500" id="allSharedAmount"></p>
                         <p>บาท</p>
                     </div>
                     <div class="flex justify-end">
                         <a href="/report.html" class="w-[60%] text-black py-2 rounded-md font-semibold hover:bg-blue-200 text-center inline-block">
                             <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                            เช็คประวัติ 
+                            เช็คประวัติ
                         </a>
                     </div>
                 </div>
+            
+                <div class="flex flex-col md:flex-row w-full items-center justify-center pt-5">
+                    <!-- ลิ้งค์ผู้แนะนำ -->
+                    <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full p-3">
+                        <div class="flex-1 rounded-lg shadow-lg p-5 text-center border border-gray-300 transition-transform transform hover:scale-105">
+                            <a href="/regis.html?TOSSAGUN-1728541119096" class="flex items-center pb-2 space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                                </svg>
+                                <h2 class="text-black text-xl md:text-2xl rounded-2xl">ลิ้งค์ผู้แนะนำ</h2>
+                            </a>
+                        </div>
+                    </div>
+            
+                    <!-- สแกน Qrcode ผู้แนะนำ -->
+                    <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full p-3">
+                        <div class="flex-1 rounded-lg shadow-lg p-5 text-center border border-gray-300 transition-transform transform hover:scale-105">
+                            <button onclick="openQr(event)" class="flex items-center pb-2 space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-qr-code-scan" viewBox="0 0 16 16">
+                                    <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5M.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5M4 4h1v1H4z"/>
+                                    <path d="M7 2H2v5h5zM3 3h3v3H3zm2 8H4v1h1z"/>
+                                    <path d="M7 9H2v5h5zm-4 1h3v3H3zm8-6h1v1h-1z"/>
+                                    <path d="M9 2h5v5H9zm1 1v3h3V3zM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8zm2 2H9V9h1zm4 2h-1v1h-2v1h3zm-4 2v-1H8v1z"/>
+                                    <path d="M12 9h2V8h-2z"/>
+                                </svg>
+                                <h2 class="text-black text-xl md:text-2xl rounded-2xl">สแกน QR Code ผู้แนะนำ</h2>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
+             <!-- Modal structure -->
+             <div id="QrConsentModal" class="fixed inset-0 w-screen bg-black bg-opacity-50 flex items-center justify-center z-50" style="display: none;">
+                <div class="bg-white rounded-lg shadow-lg p-5 w-11/12 md:w-1/3 max-w-full">
+                    <img src="./Qr3.png" alt="QR Code" class="w-full h-auto" onerror="this.style.display='none';">
+                </div>
+            </div>
+            
+
+
+            
+            
+            
+            
+            
+
             <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center w-full p-2 z-0  ">
                 <div class="stat-box relative rounded-lg shadow-lg text-center w-full border border-gray-300 transition-transform transform hover:scale-105 ">
                    <img src="fade.png" alt="laoruayPage" class="w-full rounded-lg "> 
-                    <a href="https://a.laoruay.com/67047645" target="_blank" rel="noopener noreferrer" class="absolute inset-0 flex flex-col items-center justify-center pl-5 pr-5">
+                    <a href="https://laoruay.com/" target="_blank" rel="noopener noreferrer" class="absolute inset-0 flex flex-col items-center justify-center pl-5 pr-5">
                         <div class="p-5 bg-gradient-to-r from-purple-300 to-yellow-300 border border-gray-400 rounded-lg w-full"> 
                             <h2 class="text-black text-2xl rounded-2xl pt-6 ">เข้าสู่ Lao Ruay</h2>
                              <button type="submit" class="w-[60%] py-2 rounded-md font-bold text-red-600 text-2xl">
@@ -229,7 +276,7 @@
                     throw new Error('No token found');
                 }
         
-                const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/orders', {
+                const response = await fetch('http://183.88.209.149:18899/laosruey/api/v1/orders', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -262,39 +309,8 @@
         
         fetchData();
     </script>
-     <script>
-        async function fetchOrderData() {
-            try {
-                const token = localStorage.getItem('token'); 
-                if (!token) {
-                    throw new Error('No token found');
-                }
     
-                const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/orders', {
-                    method: 'GET', 
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` 
-                    },
-                });
-    
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-    
-                const data = await response.json();
-                const agentCode = data.agent_code; 
-                console.log(`Agent Code: ${agentCode}`);
-    
-                const newUrl = `${window.location.protocol}//${window.location.host}/register.html/?agent_code=${agentCode}/dashboard.html`;
-                window.history.pushState({ path: newUrl }, '', newUrl);
-    
-            } catch (error) {
-                console.error("Error fetching order data:", error);
-            }
-        }
-        fetchOrderData();
-    </script>
+
     
    <script>
         function displayImage(event) {
@@ -323,7 +339,7 @@
             throw new Error('No token found');
         }
 
-        const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/me', {
+        const response = await fetch('http://183.88.209.149:18899/laosruey/api/v1/me', {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json',
@@ -400,6 +416,36 @@ fetchUserData();
                 modal.style.display = 'none'; 
             }
         }
+
+
+        function openQr(event) {
+            event.stopPropagation();
+            const modal = document.getElementById('QrConsentModal');
+            if (modal) {
+                modal.style.display = 'flex'; 
+
+            }
+            document.addEventListener('click', closeModalOnClickOutside);
+    }
+
+
+    function closeQr() {
+            const modal = document.getElementById('QrConsentModal');
+            if (modal) {
+                modal.style.display = 'none'; 
+
+            }
+            document.removeEventListener('click', closeModalOnClickOutside);
+
+        }
+
+        function closeModalOnClickOutside(event) {
+        const modal = document.getElementById('QrConsentModal');
+        const modalContent = modal.querySelector('.bg-white'); 
+        if (modal && !modalContent.contains(event.target) && !event.target.closest('button')) {
+            closeQr();
+        }
+    }
 
         function toggleContent(contentId) {
         const content = document.getElementById(contentId);

@@ -259,9 +259,7 @@
 });
 
     </script>
-    <!-- <script>
-     
-       
+    <script>
      async function fetchUserData() {
     try {
       const token = localStorage.getItem('token');
@@ -297,7 +295,7 @@
           if (result.isConfirmed) {
             document.getElementById('code').value = code;
 
-            const newUrl = `${window.location.protocol}//${window.location.host}/register.html?${code}`;
+            const newUrl = `${window.location.protocol}//${window.location.host}/regis.html?${code}`;
             window.history.pushState({ path: newUrl }, '', newUrl);
           } else {
             document.getElementById('code').value = '';
@@ -312,10 +310,9 @@
   }
 
   fetchUserData();
-  
 
 
-    </script> -->
+    </script>
     
 
     <script>

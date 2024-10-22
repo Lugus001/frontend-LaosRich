@@ -14,19 +14,25 @@ import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 import Shop from "./pages/Shop";
 import Test from "./pages/Test";
+import Register from "./pages/Auth/register";
+import Sales from './pages/Sales/index';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      //<RequireAuth>
+      <RequireAuth>
       <MainLayout />
-      //</RequireAuth>
+      </RequireAuth>
     ),
     children: [
-      {
+      {/*
         path: "",
         element: <Dashboard />,
+      */},
+      {
+        path: "",
+        element: <Sales />,
       },
       {
         path: "/shop",
@@ -62,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
       },
     ],
   },

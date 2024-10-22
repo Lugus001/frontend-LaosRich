@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import lineLogo from '../../assets/icon/line.svg';
-import GoogleLogo from '../../assets/icon/google.svg';
-import phone from '../../assets/icon/phone.svg';
+
 import loaluy from '../../assets/logo/loaluay.png';
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -16,7 +14,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://192.168.1.154:8899/laosruey/api/v1/login', {
+      const response = await fetch('http://183.88.209.149:18899/laosruey/api/v1/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +67,7 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label htmlFor="username" className="block text-sm font-medium text-white font-kanit">
-                ที่อยู่อีเมลหรือ User Name
+                 User Name
               </label>
               <input
                 type="text"
@@ -112,41 +110,8 @@ const Login = () => {
             </button>
 
             <div className="flex items-center justify-center my-8">
-              <div className="border-t border-gray-400 flex-grow mr-2"></div>
-              <span className="text-center font-bold text-sm text-gray-400 font-kanit">หรือเข้าสู่ระบบด้วย</span>
-              <div className="border-t border-gray-400 flex-grow ml-2"></div>
-            </div>
-
-            <div className="flex justify-center mb-5">
-              <button type="button" className="w-full text-gray-500 py-3 rounded-md bg-white text-sm hover:bg-gray-500 flex items-center justify-center">
-                <div className="pr-2">
-                  <img src={phone} alt="Phone Logo" className="w-5 h-5" />
-                </div>
-                ลงชื่อเข้าใช้ด้วย เบอร์โทร
-              </button>
-            </div>
-
-            <div className="flex justify-center mb-5">
-              <button type="button" className="w-full text-gray-500 py-3 rounded-md bg-white text-sm hover:bg-gray-500 flex items-center justify-center">
-                <div className="pr-2">
-                  <img src={GoogleLogo} alt="Google Logo" className="w-5 h-5" />
-                </div>
-                ลงชื่อเข้าใช้ด้วย Google
-              </button>
-            </div>
-
-            <div className="flex justify-center mb-5">
-              <button type="button" className="w-full text-gray-500 py-3 rounded-md bg-white text-sm hover:bg-gray-500 flex items-center justify-center">
-                <div className="pr-4">
-                  <img src={lineLogo} alt="Line Logo" className="w-5 h-5" />
-                </div>
-                ลงชื่อเข้าใช้ด้วย Line
-              </button>
-            </div>
-
-            <div className="flex items-center justify-center my-8">
               <h1 className="text-white text-sm pr-1">ยังไม่มีบัญชี?</h1>
-              <a href="#" className="text-green-400 text-sm">สมัครสมาชิก</a>
+              <a href="/auth/register" className="text-green-400 text-sm">สมัครสมาชิก</a>
             </div>
           </form>
         </div>
