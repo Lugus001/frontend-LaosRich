@@ -67,7 +67,7 @@
                         </div>
                         <div class="flex flex-col mb-4 md:mb-0 md:mr-4 md:items-start md:p-5">
                             <p class="text-gray-400 text-sm font-small">Agent Code</p>
-                            <div id="agent_code" class="text-xl font-medium"></div>
+                            <div id="code" class="text-xl font-medium"></div>
                         </div>
                     </div>
                 </div>
@@ -350,7 +350,7 @@
         const data = await response.json(); 
 
         if (response.ok) {
-            const { first_name, last_name, email, phone, region, agent_code } = data.user; 
+            const { first_name, last_name, email, phone, region, code } = data.user; 
 
             if (first_name) {
                 document.getElementById('first_name').textContent = ` ${first_name}`;  
@@ -383,13 +383,13 @@
                 document.getElementById('region').textContent = 'region ไม่พร้อมใช้งาน'; 
             }
 
-            if (agent_code) {
-                document.getElementById('agent_code').textContent = `${agent_code}`; 
+            if (code) {
+                document.getElementById('code').textContent = `${code}`; 
             } else {
-                document.getElementById('agent_code').textContent = 'agent_code ไม่พร้อมใช้งาน'; 
+                document.getElementById('code').textContent = 'code ไม่พร้อมใช้งาน'; 
             }
 
-            console.log('Response data:', { first_name, last_name , email, phone, region, agent_code });
+            console.log('Response data:', { first_name, last_name , email, phone, region, code });
         } else {
             throw new Error(data.message || 'Error fetching user data');
         }

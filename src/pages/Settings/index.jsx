@@ -11,12 +11,12 @@ const Index = () => {
   });
 
   const [formData, setFormData] = useState({
-    firstName: "นายอมร",
-    lastName: "วงคำเหลา",
-    email: "test01@test.com",
-    phone: "+66 0855555555",
-    region: "th",
-    agentCode: "TOSSAGUN",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    region: "",
+    agentCode: "",
     address: "",
     province: "",
     district: "",
@@ -26,45 +26,39 @@ const Index = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
 
+  // Fetch user data from the API
   useEffect(() => {
-    const initLongdoAddressForm = () => {
-      const script1 = document.createElement("script");
-      script1.src = "https://api.longdo.com/map/?key=fortestonlydonotuseinproduction!";
-      script1.async = true;
-      document.body.appendChild(script1);
-  
-      script1.onload = () => {
-        const script2 = document.createElement("script");
-        script2.src = "https://api.longdo.com/address-form/js/addressform.js";
-        script2.async = true;
-        document.body.appendChild(script2);
-  
-        script2.onload = () => {
-          if (window.longdo && window.longdo.Map) {
-            window.myform = new window.longdo.AddressForm("form_div", {
-              layout: window.longdo.AddressForm,
-              showLabels: false,
-              required: { poi: true },
-              debugDiv: "debugoutput",
-            });
-            document.getElementById('form_div').classList.add('longdo-address-form');
-          } else {
-            console.error("Longdo Map is not ready.");
-          }
-        };
-  
-        script2.onerror = () => {
-          console.error("Failed to load Longdo Address Form script.");
-        };
-      };
-  
-      script1.onerror = () => {
-        console.error("Failed to load Longdo Map script.");
-      };
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://183.88.209.149:18899/laosruey/api/v1/me");
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        const data = await response.json();
+        
+        // Set form data with the fetched user data
+        const user = data.user;
+        setFormData({
+          firstName: user.first_name,
+          lastName: user.last_name,
+          email: user.email,
+          phone: `${user.phone_prefix} ${user.phone}`,
+          region: user.region,
+          agentCode: user.agent_code,
+          address: "", // Adjust as necessary
+          province: "", // Adjust as necessary
+          district: "", // Adjust as necessary
+          postcode: "", // Adjust as necessary
+        });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
     };
-  
-    initLongdoAddressForm();
+
+    fetchUserData();
   }, []);
+
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,7 +66,7 @@ const Index = () => {
   };
 
   const toggleEdit = () => {
-    setIsEditing(!isEditing);
+    setIsEditing((prev) => !prev);
   };
 
   const handleImageUpload = (e) => {
@@ -157,101 +151,96 @@ const Index = () => {
           </Box>
 
           <form onSubmit={handleSubmit}>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      <TextField
-        label="ชื่อ"
-        name="firstName"
-        value={formData.firstName}
-        onChange={handleChange}
-        disabled={!isEditing}
-        variant="outlined"
-        fullWidth
-        required
-      />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <TextField
+                label="ชื่อ"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                disabled={!isEditing}
+                variant="outlined"
+                fullWidth
+                required
+              />
 
-      <TextField
-        label="นามสกุล"
-        name="lastName"
-        value={formData.lastName}
-        onChange={handleChange}
-        disabled={!isEditing}
-        variant="outlined"
-        fullWidth
-        required
-      />
-    </div>
+              <TextField
+                label="นามสกุล"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                disabled={!isEditing}
+                variant="outlined"
+                fullWidth
+                required
+              />
+            </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      <TextField
-        label="Email"
-        name="email"
-        type="email"
-        value={formData.email}
-        onChange={handleChange}
-        disabled={!isEditing}
-        variant="outlined"
-        fullWidth
-        required
-      />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <TextField
+                label="Email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                disabled={!isEditing}
+                variant="outlined"
+                fullWidth
+                required
+              />
 
-      <TextField
-        label="เบอร์โทร"
-        name="phone"
-        value={formData.phone}
-        onChange={handleChange}
-        disabled={!isEditing}
-        variant="outlined"
-        fullWidth
-        required
-      />
-    </div>
+              <TextField
+                label="เบอร์โทร"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                disabled={!isEditing}
+                variant="outlined"
+                fullWidth
+                required
+              />
+            </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      <TextField
-        label="สัญชาติ"
-        name="region"
-        value={formData.region}
-        onChange={handleChange}
-        disabled={!isEditing}
-        variant="outlined"
-        fullWidth
-        required
-      />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <TextField
+                label="สัญชาติ"
+                name="region"
+                value={formData.region}
+                onChange={handleChange}
+                disabled={!isEditing}
+                variant="outlined"
+                fullWidth
+                required
+              />
 
-      <TextField
-        label="Agent Code"
-        name="agentCode"
-        value={formData.agentCode}
-        onChange={handleChange}
-        disabled={!isEditing}
-        variant="outlined"
-        fullWidth
-        required
-      />
-    </div>
+              <TextField
+                label="Agent Code"
+                name="agentCode"
+                value={formData.agentCode}
+                onChange={handleChange}
+                disabled={!isEditing}
+                variant="outlined"
+                fullWidth
+                required
+              />
+            </div>
 
-  {/* Longdo Address Form styled similarly */}
-  <div id="form_div" className="longdo-address-form ">
-  Loading Longdo Address Form...
- </div>
-
-
-    <div className="flex justify-end mt-4">
-      <Button
-        onClick={toggleEdit}
-        variant="contained"
-        color="primary"
-        className="ml-5"
-      >
-        {isEditing ? "แก้ไขข้อมูล" : "ยกเลิก"}
-      </Button>
-      {isEditing && (
-        <Button type="submit" variant="contained" color="success">
-          บันทึกการเปลี่ยนแปลง
-        </Button>
-      )}
-    </div>
-  </form>
+          
+            <div className="flex justify-end mt-4">
+              <Button
+                onClick={toggleEdit}
+                variant="contained"
+                color="primary"
+                className="ml-5"
+              >
+                {isEditing ? "ยกเลิก" : "แก้ไขข้อมูล"}
+              </Button>
+              {isEditing && (
+                <Button type="submit" variant="contained" color="success">
+                  บันทึกการเปลี่ยนแปลง
+                </Button>
+              )}
+            </div>
+          </form>
         </Box>
       </Box>
     </Box>

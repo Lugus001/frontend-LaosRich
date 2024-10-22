@@ -6,12 +6,12 @@ import Topbar from "../pages/global/Topbar";
 const MainLayout = () => {
   return (
     <div className="flex max-h-full">
-      {<SideBar />}
+     {/* {<SideBar />} */} 
 
       <div className="flex flex-col flex-1">
         <Topbar />
 
-        <div className="flex-1 bg-gray-100 p-4">
+        <div className="flex-1  ">
           <Outlet />
         </div>
       </div>

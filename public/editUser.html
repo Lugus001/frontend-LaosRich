@@ -67,8 +67,8 @@
 
                 <!-- Agent Code -->
                 <div>
-                    <label for="agent_code" class="text-gray-400 text-sm">Agent Code</label>
-                    <input id="agent_code" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" >
+                    <label for="code" class="text-gray-400 text-sm">Agent Code</label>
+                    <input id="code" type="text" class="w-full text-xl font-medium border border-gray-300 rounded-md p-2" >
                 </div>
             </div>
 
@@ -129,7 +129,7 @@
                 const data = await response.json(); 
 
                 if (response.ok) {
-                    const { first_name, last_name, email, phone, region, agent_code } = data.user; 
+                    const { first_name, last_name, email, phone, region, code } = data.user; 
 
                     // Set values to form inputs
                     document.getElementById('first_name').value = first_name || 'First name not available';
@@ -137,9 +137,9 @@
                     document.getElementById('email').value = email || 'Email not available';
                     document.getElementById('phone').value = phone || 'Phone not available';
                     document.getElementById('region').value = region || 'Region not available';
-                    document.getElementById('agent_code').value = agent_code || 'Agent code not available';
+                    document.getElementById('code').value = code || 'code not available';
 
-                    console.log('Response data:', { first_name, last_name , email, phone, region, agent_code });
+                    console.log('Response data:', { first_name, last_name , email, phone, region, code });
                 } else {
                     throw new Error(data.message || 'Error fetching user data');
                 }
@@ -159,7 +159,7 @@
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
                 region: document.getElementById('region').value,
-                agent_code: document.getElementById('agent_code').value
+                code: document.getElementById('code').value
             };
 
             const token = localStorage.getItem('token'); 

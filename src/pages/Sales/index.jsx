@@ -2,30 +2,21 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import "../../../src/index.css";
 import RealtimeBox from "../../components/RealtimeBox";
-import Loaluay from '../../assets/logo/loaluay.png';
 
 const Index = () => {
  
-
   return (
-    <Box className="bg-gray-100 min-h-screen p-4 md:p-5 ">
+    <Box className="bg-black min-h-screen p-4 md:p-5 ">
       <Box className="flex flex-col md:flex-col md:justify-between md:items-center  p-4  mb-4 ">
-      
         <Box className='w-full p-3 '>
-        <RealtimeBox
-          title="ยอดขายรูปของวันนี้"
-          num = "1"
-          picture={Loaluay}
-          subtitle='NFT '
-          total='1'
-          prize='100'
-        />
-
+          <RealtimeBox
+              title="ยอดขายรูปของวันนี้"
+              num = "1500"
+              noun='ใบ'
+            
+            />
         </Box>
-        
       </Box>
-     
-     
       <Box
         display="flex"
         justifyContent="space-between"
@@ -33,9 +24,6 @@ const Index = () => {
         mb={2}
       ></Box>
 
-  
-
-     
     </Box>
   );
 };
