@@ -3,13 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "test": "vite --mode testing",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",    
+    "deploy": "gh-pages -d dist", 
+    "homepage": "https://Lugus001.github.io/frontend-LaosRich"
+
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -26,6 +29,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "gh-pages": "^6.2.0",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "primeicons": "^7.0.0",

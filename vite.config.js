@@ -4,10 +4,15 @@ import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/deploy_react_app_github_pages_vercel",
   server: {
     host: '0.0.0.0', 
     port: 26677,
     
+  },
+
+  build: {
+    outDir: 'dist',
   },
 
   
