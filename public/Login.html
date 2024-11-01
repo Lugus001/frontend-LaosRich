@@ -36,6 +36,7 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           />
+
         </svg>
       </h1>
     </div>
@@ -146,8 +147,9 @@
         const password = document.getElementById("password").value;
 
         try {
-          const response = await fetch('http://183.88.209.149:18899/laosruey/api/v1/login', {
+          const response = await fetch('http://183.88.209.149:28899/laosruey/api/v1/login', {
             method: 'POST',
+            
             headers: {
               'Content-Type': 'application/json',
             },
@@ -156,7 +158,9 @@
               username:email ,
               password 
             }
+            
           ),
+          
           });
 
           const data = await response.json();

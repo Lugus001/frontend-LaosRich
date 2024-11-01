@@ -16,6 +16,7 @@ import Shop from "./pages/Shop";
 import Test from "./pages/Test";
 import Register from "./pages/Auth/register";
 import Sales from './pages/Sales/index';
+import Report from './pages/report/index';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/settings",
         element: <Settings />,
+      },
+      {
+        path: "/report",
+        element: <Report />,
       },
       {
         path: "/test",

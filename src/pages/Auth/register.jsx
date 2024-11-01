@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import loaluy from '../../assets/logo/loaluay.png';
 import laosFlag from '../../assets/logo/laos-flag-icon.png';
-import thFlag from '../../assets/logo/th-flag.png'; 
+import loaluy from '../../assets/logo/loaluay.png';
+import thFlag from '../../assets/logo/th-flag.png';
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -42,7 +42,7 @@ const Register = () => {
     console.log('Registration Data:', registrationData);
   
     try {
-      const response = await fetch("http://183.88.209.149:18899/laosruey/api/v1/register", {
+      const response = await fetch("http://183.88.209.149:28899/laosruey/api/v1/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

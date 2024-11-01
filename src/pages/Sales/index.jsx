@@ -9,11 +9,12 @@ const Index = () => {
     <Box className="bg-black min-h-screen p-4 md:p-5 ">
       <Box className="flex flex-col md:flex-col md:justify-between md:items-center  p-4  mb-4 ">
         <Box className='w-full p-3 '>
+
+          {/* เปลี่ยนยอดขายจากตรงนี้ */}
           <RealtimeBox
               title="ยอดขายรูปของวันนี้"
-              num = "1500"
+              num = "33,654" 
               noun='ใบ'
-            
             />
         </Box>
       </Box>
@@ -29,3 +30,4 @@ const Index = () => {
 };
 
 export default Index;
+  

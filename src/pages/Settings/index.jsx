@@ -1,6 +1,6 @@
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { Box, Typography, Button, TextField } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import "../../../src/index.css";
 
 const Index = () => {
@@ -30,7 +30,7 @@ const Index = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("http://183.88.209.149:18899/laosruey/api/v1/me");
+        const response = await fetch("http://183.88.209.149:28899/laosruey/api/v1/me");
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
         }

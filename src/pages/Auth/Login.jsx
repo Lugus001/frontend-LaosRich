@@ -1,6 +1,6 @@
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 import loaluy from '../../assets/logo/loaluay.png';
 const Login = () => {
@@ -14,7 +14,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://183.88.209.149:18899/laosruey/api/v1/login', {
+      const response = await fetch('http://183.88.209.149:28899/laosruey/api/v1/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label htmlFor="username" className="block text-sm font-medium text-white font-kanit">
-                 User Name
+                 ชื่อผู้ใช้
               </label>
               <input
                 type="text"
